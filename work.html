@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MY WORKS | Swaraj Krishna</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <!-- Font Awesome for video control icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: {
+                  primary: "#8B5CF6",
+                  "primary-container": "#6D28D9",
+                },
+                fontFamily: {
+                  "headline": ["Manrope", "sans-serif"],
+                  "body": ["Inter", "sans-serif"],
+                  "label": ["Inter", "sans-serif"],
+                  "antonio": ["Antonio", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              },
+            },
+          }
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .video-control-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 9999px;
+        background: rgba(255, 255, 255, 0.85);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        color: #1B1C1C;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        outline: none;
+      }
+      .video-control-btn:hover {
+        background: #1B1C1C;
+        color: white;
+        border-color: #1B1C1C;
+        transform: scale(1.05);
+      }
+    </style>
+  </head>
+  <body class="bg-[#FBF9F8] text-[#1B1C1C] font-body selection:bg-primary selection:text-white pt-20">
+
+  <div id="nav"></div>
+
+  <!-- Showreel Video Hero Banner -->
+  <section class="relative h-[65vh] w-full bg-black overflow-hidden flex flex-col justify-center items-center text-center">
+    <!-- Background Video -->
+    <video id="hero-video" autoplay loop playsinline muted class="absolute top-50 left-50 w-full h-full min-w-full min-h-full object-cover z-0 pointer-events-none brightness-[0.5]">
+      <source src="img/Show Reel/VFX-Hightlight.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <!-- Hero Text Overlay -->
+    <div class="relative z-10 px-8 max-w-4xl">
+      <span class="inline-block text-xs font-bold uppercase tracking-[0.4em] text-primary mb-4">VFX &amp; Cinematography Highlight</span>
+      <h1 class="font-antonio text-5xl md:text-8xl uppercase font-bold tracking-tight text-white mb-6">Show Reel</h1>
+      <p class="text-lg md:text-xl text-white/80 font-body max-w-xl mx-auto leading-relaxed">
+        Explore a curated compilation of visual effects compositing, professional camera movement, and high-precision color editing.
+      </p>
+    </div>
+
+    <!-- Video Controls on Bottom Right -->
+    <div class="absolute bottom-6 right-6 z-20 flex gap-3">
+      <button id="video-play-btn" class="video-control-btn" title="Play/Pause">
+        <i class="fa fa-pause text-sm" id="video-play-icon"></i>
+      </button>
+      <button id="video-mute-btn" class="video-control-btn" title="Mute/Unmute">
+        <i class="fa fa-volume-off text-sm" id="video-mute-icon"></i>
+      </button>
+    </div>
+  </section>
+
+  <!-- Filter Navigation & Gallery Section -->
+  <section class="py-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+    <!-- Filter Bar -->
+    <div class="flex justify-center mb-16 overflow-x-auto">
+      <ul class="flex gap-4 md:gap-10 border-b border-black/5 pb-4 px-4 font-antonio text-xl md:text-2xl uppercase tracking-wider">
+        <li class="cursor-pointer border-b-2 pb-2 transition-all active-filter text-black border-black font-bold" data-filter="all" onclick="filterGallery('all', this)">All</li>
+        <li class="cursor-pointer border-b-2 pb-2 transition-all text-black/60 hover:text-black border-transparent" data-filter="vfxartist" onclick="filterGallery('vfxartist', this)">VFX Artist</li>
+        <li class="cursor-pointer border-b-2 pb-2 transition-all text-black/60 hover:text-black border-transparent" data-filter="cinematographer" onclick="filterGallery('cinematographer', this)">Cinematographer</li>
+        <li class="cursor-pointer border-b-2 pb-2 transition-all text-black/60 hover:text-black border-transparent" data-filter="editor" onclick="filterGallery('editor', this)">Editor</li>
+        <li class="cursor-pointer border-b-2 pb-2 transition-all text-black/60 hover:text-black border-transparent" data-filter="achivements" onclick="filterGallery('achivements', this)">Achievements</li>
+      </ul>
+    </div>
+
+    <!-- Gallery Grid -->
+    <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 transition-all duration-500">
+      <!-- Injected dynamically via script -->
+    </div>
+
+    <!-- Empty State -->
+    <div id="gallery-empty" class="hidden text-center py-20 text-black/40 font-antonio text-2xl uppercase">
+      No items found in this category.
+    </div>
+  </section>
+
+  <!-- Lightbox Modal Container (Hidden by default) -->
+  <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <button class="absolute top-6 right-6 text-white hover:text-primary transition-colors focus:outline-none z-50" onclick="closeLightbox()">
+      <span class="material-symbols-outlined text-4xl">close</span>
+    </button>
+    <div class="w-full max-w-4xl max-h-[85vh] flex flex-col items-center justify-center relative">
+      <!-- Video Player -->
+      <div id="lightbox-video-container" class="w-full aspect-video hidden">
+        <iframe id="lightbox-iframe" class="w-full h-full rounded-sm" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <!-- Image Viewer -->
+      <div id="lightbox-image-container" class="max-w-full max-h-full hidden flex flex-col items-center">
+        <img id="lightbox-img" class="max-w-full max-h-[75vh] object-contain rounded-sm shadow-2xl" src="" alt="Lightbox View"/>
+        <div id="lightbox-caption" class="text-center text-white/80 mt-4 font-antonio tracking-wider text-xl uppercase animate-pulse"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="footer"></div>
+
+  <!-- Dynamic Gallery JavaScript Data & Logic -->
+  <script>
+    const projectFolders = {
+      "blender-3d": {
+        "title": "Blender 3D",
+        "images": [
+          "img/VFX Artist/Blender 3D OUT images/3D police Station Concept.png",
+          "img/VFX Artist/Blender 3D OUT images/Cube_3D.png",
+          "img/VFX Artist/Blender 3D OUT images/Galaxy Watch 3D (2).png",
+          "img/VFX Artist/Blender 3D OUT images/Galaxy Watch 3D.png",
+          "img/VFX Artist/Blender 3D OUT images/Gopro13-3D.png",
+          "img/VFX Artist/Blender 3D OUT images/Gopro13...png",
+          "img/VFX Artist/Blender 3D OUT images/Gopro13..png",
+          "img/VFX Artist/Blender 3D OUT images/Miidnight chase 3D Compositing..png",
+          "img/VFX Artist/Blender 3D OUT images/Miidnight chase 3D Compositing.png",
+          "img/VFX Artist/Blender 3D OUT images/NIVEA 3D Model.png",
+          "img/VFX Artist/Blender 3D OUT images/Photo Out.png",
+          "img/VFX Artist/Blender 3D OUT images/ROOM_3D.png",
+          "img/VFX Artist/Blender 3D OUT images/Toaster-3D.png",
+          "img/VFX Artist/Blender 3D OUT images/Watch Tower-3d.jpg"
+        ]
+      },
+      "vfx-studio": {
+        "title": "VFX Studio",
+        "images": [
+          "img/VFX Artist/VFX Studio/DSC01805.JPG",
+          "img/VFX Artist/VFX Studio/DSC01825.JPG"
+        ]
+      },
+      "cinematography": {
+        "title": "Cinematography",
+        "images": [
+          "img/Cinematographer/Cinematogrpahy/0C6A9756.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC01717 2.jpg",
+          "img/Cinematographer/Cinematogrpahy/DSC01726.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC01733.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC01758.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC01769.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC01831.JPG",
+          "img/Cinematographer/Cinematogrpahy/DSC08658.JPG"
+        ]
+      },
+      "bike-photography": {
+        "title": "Bike Photography",
+        "images": [
+          "img/Cinematographer/Bike Photography/DSC00188.JPG", 
+          "img/Cinematographer/Bike Photography/DSC00191.JPG",
+          "img/Cinematographer/Bike Photography/DSC00923.JPG",
+          "img/Cinematographer/Bike Photography/DSC08465_SnapseedCopy.jpg",
+          "img/Cinematographer/Bike Photography/DSC08788.JPG",
+          "img/Cinematographer/Bike Photography/DSC08795.JPG",
+          "img/Cinematographer/Bike Photography/IMG_3768.JPG",
+          "img/Cinematographer/Bike Photography/IMG_5926.JPG",
+          "img/Cinematographer/Bike Photography/IMG_6153.JPG",
+          "img/Cinematographer/Bike Photography/IMG_6157.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7677.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7705.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7790.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7850.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7866.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7873.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9230.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9356_jpg.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9614.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9840.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9845.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9885.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9897.JPG",
+          "img/Cinematographer/Bike Photography/IMG_20221229_0058.jpg",
+          "img/Cinematographer/Bike Photography/ld-export-482168ce-09012025.JPG",
+          "img/Cinematographer/Bike Photography/ld-export-2135895f-09012025_SnapseedCopy.jpg",
+          "img/Cinematographer/Bike Photography/ld-export-4026823f-05112023.JPG",
+          "img/Cinematographer/Bike Photography/ld-export-b1107463-02222023.JPG",
+          "img/Cinematographer/Bike Photography/ld-export-bfb8b57f-07052023.JPG",
+          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.24.52 PM_SnapseedCopy.jpg",
+          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.28.09 PM.JPG",
+          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.31.50 PM.jpg",
+          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.36.40 PM.JPG"
+        ]
+      },
+      "car-photography": {
+        "title": "Car Photography",
+        "images": [
+          "img/Cinematographer/Car Photography/IMG_9232.JPG"
+        ]
+      },
+      "festival-photography": {
+        "title": "Festival Photography",
+        "images": [
+          "img/Cinematographer/Festival Photography/DSC07960.JPG",
+          "img/Cinematographer/Festival Photography/DSC07982.JPG",
+          "img/Cinematographer/Festival Photography/DSC08116.JPG",
+          "img/Cinematographer/Festival Photography/DSC08184.JPG",
+          "img/Cinematographer/Festival Photography/DSC08232.JPG",
+          "img/Cinematographer/Festival Photography/DSC08262.JPG",
+          "img/Cinematographer/Festival Photography/DSC08289.JPG"
+        ]
+      },
+      "models": {
+        "title": "Models Portrait",
+        "images": [
+          "img/Cinematographer/Models/DSC08725.jpg",
+          "img/Cinematographer/Models/DSC08755.JPG",
+          "img/Cinematographer/Models/DSC08764.jpg",
+          "img/Cinematographer/Models/DSC08794 2.JPG",
+          "img/Cinematographer/Models/DSC08844.JPG",
+          "img/Cinematographer/Models/IMG_7716.JPG",
+          "img/Cinematographer/Models/IMG_8440.PNG",
+          "img/Cinematographer/Models/IMG_8441.PNG",
+          "img/Cinematographer/Models/IMG_8442.PNG",
+          "img/Cinematographer/Models/IMG_8443.PNG",
+          "img/Cinematographer/Models/IMG_8445.PNG"
+        ]
+      },
+      "achivements": {
+        "title": "Achievements",
+        "images": [
+          "img/Others/Achivements/IMG_3069.jpg",
+          "img/Others/Achivements/IMG_4452.jpg",
+          "img/Others/Achivements/IMG_4453.jpg",
+          "img/Others/Achivements/IMG_4454.jpg",
+          "img/Others/Achivements/IMG_5405.HEIC",
+          "img/Others/Achivements/IMG_7181_jpg.JPG",
+          "img/Others/Achivements/IMG_8585.jpg",
+          "img/Others/Achivements/photo-output.HEIC"
+        ]
+      }
+    };
+
+    const filtersMap = {
+      'blender-3d': 'vfxartist',
+      'vfx-studio': 'vfxartist',
+      'bike-photography': 'cinematographer',
+      'cinematography': 'cinematographer',
+      'car-photography': 'cinematographer',
+      'festival-photography': 'cinematographer',
+      'models': 'cinematographer',
+      'achivements': 'achivements'
+    };
+
+    const portfolioVideos = [
+      { src: 'img/portfolio/kappiri.png', url: 'https://youtu.be/FXr-2BpS4Po?si=4ENMvQX2Tk3CHRfu', description:"KAPPIRI-Documentary", filter: ['vfxartist', 'editor', 'cinematographer'] },
+      { src: 'img/portfolio/foodadvfx.png', url: 'https://youtu.be/ECdSHubQGi8?si=CpiKRRDoNOVTuQmn', description:"KHUSRU FOODS AD", filter: ['vfxartist', 'editor', 'cinematographer'] },
+      { src: 'img/portfolio/paperboat.png', url: 'https://m.youtube.com/watch?v=5XdWwAL--mQ', description:"PAPERBOAT - AD", filter: ['vfxartist', 'editor', 'cinematographer'] },
+      { src: 'img/portfolio/phonepay.png', url: 'https://m.youtube.com/watch?v=kfiAp_Hq1eM', description:"PhonePe - AD", filter: ['vfxartist', 'editor', 'cinematographer'] },
+      { src: 'img/portfolio/gopro.png', url: 'https://youtu.be/TmDsi-9pgz8?si=EwDJHVq_ICLJlFHM', description:"GoPro13 - 3D Motion Graphics AD", filter: ['vfxartist'] },
+      { src: 'img/portfolio/gemini.png', url: 'https://youtu.be/UJscUDJCq1s?si=STrGlUlrOn9CnulO', description:"Google Gemini - 2D Motion Graphics AD", filter: ['vfxartist'] }
+    ];
+
+    let allItems = [];
+
+    // Compile videos
+    portfolioVideos.forEach(v => {
+      allItems.push({
+        type: 'video',
+        src: v.src,
+        url: v.url,
+        description: v.description,
+        filters: v.filter
+      });
+    });
+
+    // Compile images
+    let folderIds = Object.keys(projectFolders);
+    folderIds = folderIds.filter(id => id !== 'blender-3d' && id !== 'vfx-studio' && id !== 'achivements');
+    folderIds.push('blender-3d', 'vfx-studio', 'achivements');
+
+    folderIds.forEach(folderId => {
+      const folder = projectFolders[folderId];
+      const category = filtersMap[folderId] || '';
+      folder.images.forEach(img => {
+        if (!img.toLowerCase().endsWith('.heic') && !img.toLowerCase().endsWith('.heif')) {
+          allItems.push({
+            type: 'image',
+            src: img,
+            filters: [category],
+            description: folder.title
+          });
+        }
+      });
+    });
+
+    // Render Function
+    function renderGrid(filterValue) {
+      const grid = document.getElementById('gallery-grid');
+      const emptyState = document.getElementById('gallery-empty');
+      grid.innerHTML = '';
+      
+      const filtered = allItems.filter(item => {
+        if (filterValue === 'all') return true;
+        return item.filters.includes(filterValue);
+      });
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+        grid.classList.add('hidden');
+        return;
+      } else {
+        emptyState.classList.add('hidden');
+        grid.classList.remove('hidden');
+      }
+
+      filtered.forEach((item, index) => {
+        let cardHTML = '';
+        if (item.type === 'video') {
+          cardHTML = `
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('video', '${item.url}', '${item.description}')">
+              <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="${item.src}" alt="${item.description}" loading="lazy"/>
+                <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div class="w-12 h-12 rounded-full bg-black/95 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
+                    <span class="material-symbols-outlined text-2xl text-white">play_arrow</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-white border-t border-black/5 flex justify-between items-center">
+                <div>
+                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">Video / VFX</span>
+                  <h3 class="font-antonio text-lg uppercase text-black font-bold truncate max-w-[170px]">${item.description}</h3>
+                </div>
+                <span class="material-symbols-outlined text-black/30 group-hover:text-primary transition-colors">arrow_outward</span>
+              </div>
+            </div>
+          `;
+        } else {
+          cardHTML = `
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('image', '${item.src}', '${item.description}')">
+              <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="${item.src}" alt="${item.description}" loading="lazy"/>
+                <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <div class="w-12 h-12 rounded-full bg-black/95 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
+                    <span class="material-symbols-outlined text-2xl text-white">visibility</span>
+                  </div>
+                </div>
+              </div>
+              <div class="p-4 bg-white border-t border-black/5 flex justify-between items-center">
+                <div>
+                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">Photography</span>
+                  <h3 class="font-antonio text-lg uppercase text-black font-bold truncate max-w-[170px]">${item.description}</h3>
+                </div>
+                <span class="material-symbols-outlined text-black/30 group-hover:text-primary transition-colors">visibility</span>
+              </div>
+            </div>
+          `;
+        }
+        grid.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    // Filter Trigger Function
+    window.filterGallery = function(filterValue, element) {
+      // Toggle nav class
+      const items = element.parentNode.querySelectorAll('li');
+      items.forEach(li => {
+        li.classList.remove('text-black', 'border-black', 'font-bold');
+        li.classList.add('text-black/60', 'border-transparent');
+      });
+      element.classList.remove('text-black/60', 'border-transparent');
+      element.classList.add('text-black', 'border-black', 'font-bold');
+      
+      // Render
+      renderGrid(filterValue);
+    };
+
+    // Lightbox Control
+    window.openLightbox = function(type, src, title) {
+      const modal = document.getElementById('lightbox-modal');
+      const videoCont = document.getElementById('lightbox-video-container');
+      const imgCont = document.getElementById('lightbox-image-container');
+      const iframe = document.getElementById('lightbox-iframe');
+      const img = document.getElementById('lightbox-img');
+      const caption = document.getElementById('lightbox-caption');
+      
+      if (!modal) return;
+      
+      videoCont.classList.add('hidden');
+      imgCont.classList.add('hidden');
+      iframe.src = '';
+      img.src = '';
+      
+      if (type === 'video') {
+        let embedUrl = src;
+        if (embedUrl.includes('watch?v=')) {
+          const id = embedUrl.split('v=').pop().split('&')[0];
+          embedUrl = `https://www.youtube.com/embed/${id}`;
+        } else if (embedUrl.includes('youtu.be/')) {
+          const id = embedUrl.split('youtu.be/').pop().split('?')[0];
+          embedUrl = `https://www.youtube.com/embed/${id}`;
+        }
+        iframe.src = embedUrl + "?autoplay=1";
+        videoCont.classList.remove('hidden');
+      } else {
+        img.src = src;
+        caption.textContent = title || '';
+        imgCont.classList.remove('hidden');
+      }
+      
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function() {
+      const modal = document.getElementById('lightbox-modal');
+      const iframe = document.getElementById('lightbox-iframe');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+        if (iframe) iframe.src = '';
+        document.body.style.overflow = '';
+      }
+    };
+
+    document.getElementById('lightbox-modal')?.addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeLightbox();
+      }
+    });
+
+    // Check query params for active filter
+    document.addEventListener("DOMContentLoaded", () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const filter = urlParams.get('filter');
+      
+      if (filter) {
+        const filterItem = document.querySelector(`li[data-filter="${filter}"]`);
+        if (filterItem) {
+          filterGallery(filter, filterItem);
+          return;
+        }
+      }
+      renderGrid('all');
+    });
+  </script>
+
+  <!-- Hero Video Controls JavaScript -->
+  <script>
+    (function() {
+      const video = document.getElementById('hero-video');
+      const playBtn = document.getElementById('video-play-btn');
+      const playIcon = document.getElementById('video-play-icon');
+      const muteBtn = document.getElementById('video-mute-btn');
+      const muteIcon = document.getElementById('video-mute-icon');
+
+      if (video) {
+        playBtn?.addEventListener('click', () => {
+          if (video.paused) {
+            video.play();
+            playIcon.className = 'fa fa-pause text-sm';
+          } else {
+            video.pause();
+            playIcon.className = 'fa fa-play text-sm';
+          }
+        });
+
+        muteBtn?.addEventListener('click', () => {
+          if (video.muted) {
+            video.muted = false;
+            muteIcon.className = 'fa fa-volume-up text-sm';
+            muteBtn.style.background = 'rgba(255, 255, 255, 0.85)';
+            muteBtn.style.color = '#1B1C1C';
+          } else {
+            video.muted = true;
+            muteIcon.className = 'fa fa-volume-off text-sm';
+            muteBtn.style.background = '#1B1C1C';
+            muteBtn.style.color = 'white';
+          }
+        });
+      }
+    })();
+  </script>
+
+  <!-- Keyframes stylesheet injection for fadeInUp animations -->
+  <style>
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+  </style>
+
+  <!-- Loader Script -->
+  <script>
+    const loadComponent = async (id, file) => {
+      try {
+        const res = await fetch(file);
+        if (!res.ok) throw new Error(res.status);
+        const html = await res.text();
+        const container = document.getElementById(id);
+        container.innerHTML = html;
+        
+        // Execute scripts
+        const scripts = container.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+          newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+      } catch (err) {
+        console.error(`Error loading ${file}:`, err);
+      }
+    };
+
+    loadComponent("nav", "./components/nav.html");
+    loadComponent("footer", "./components/footer.html");
+  </script>
+  </body>
+</html>

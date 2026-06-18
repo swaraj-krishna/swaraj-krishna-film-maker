@@ -1,0 +1,69 @@
+<footer class="w-full py-20 bg-[#F6F3F2] border-t border-black/5 text-[#1B1C1C]">
+  <div class="max-w-screen-2xl mx-auto px-8 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+    
+    <!-- Column 1: Brand & Copyright -->
+    <div class="md:col-span-4 flex flex-col justify-between h-full min-h-[150px]">
+      <div>
+        <div class="font-['Antonio'] text-3xl font-bold tracking-tighter mb-4 text-black">
+          <a href="./index.html" class="hover:text-primary transition-colors">SWARAJ KRISHNA</a>
+        </div>
+        <p class="text-black/60 text-sm max-w-xs leading-relaxed font-body">
+          A reflection of passion in motion. From directing and editing to crafting VFX and capturing cinematic frames, each project tells a story that resonates.
+        </p>
+      </div>
+      <div class="text-xs uppercase tracking-widest opacity-50 mt-8 md:mt-0 font-body">
+        © <span id="footer-year">2026</span> SWARAJ KRISHNA. ALL RIGHTS RESERVED.
+      </div>
+    </div>
+
+    <!-- Column 2: Quick Links -->
+    <div class="md:col-span-3">
+      <h5 class="font-antonio text-xl uppercase tracking-wider mb-6 text-black font-bold">Navigation</h5>
+      <ul class="space-y-3 font-body text-sm text-black/60">
+        <li><a href="./index.html" class="hover:text-primary transition-colors">Home</a></li>
+        <li><a href="./about.html" class="hover:text-primary transition-colors">About Me</a></li>
+        <li><a href="./work.html" class="hover:text-primary transition-colors">Portfolio</a></li>
+        <li><a href="./skills.html" class="hover:text-primary transition-colors">Skills Details</a></li>
+        <li><a href="./contact.html" class="hover:text-primary transition-colors">Contact Me</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 3: Social Media -->
+    <div class="md:col-span-2">
+      <h5 class="font-antonio text-xl uppercase tracking-wider mb-6 text-black font-bold">Socials</h5>
+      <ul class="space-y-3 font-body text-sm text-black/60">
+        <li><a href="#" class="hover:text-primary transition-colors">Instagram</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">YouTube</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Dribbble</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Facebook</a></li>
+        <li><a href="#" class="hover:text-primary transition-colors">Twitter</a></li>
+      </ul>
+    </div>
+
+    <!-- Column 4: Quick Contact Form -->
+    <div class="md:col-span-3">
+      <h5 class="font-antonio text-xl uppercase tracking-wider mb-6 text-black font-bold">Let's Collaborate</h5>
+      <p class="text-black/60 text-sm mb-6 leading-relaxed font-body">Have a project in mind? Let's connect and make it happen — from concept to final cut.</p>
+      
+      <form id="footer-contact-form" class="flex gap-2">
+        <input type="email" id="footer-email-input" placeholder="Your Email" required class="bg-white border border-black/10 rounded-sm px-4 py-2 text-sm text-black placeholder-black/30 focus:outline-none focus:border-primary w-full transition-colors font-body">
+        <button type="submit" class="bg-black hover:bg-black/80 text-white px-4 rounded-sm flex items-center justify-center transition-colors active:scale-95 duration-300">
+          <span class="material-symbols-outlined text-lg text-white">send</span>
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    document.getElementById("footer-year").textContent = new Date().getFullYear();
+    
+    document.getElementById("footer-contact-form")?.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const userEmail = document.getElementById("footer-email-input").value;
+      const subject = encodeURIComponent("Collaboration request from Portfolio");
+      const body = encodeURIComponent(`Hello Swaraj Krishna,\n\nI visited your portfolio and would like to collaborate on a project.\n\nMy email: ${userEmail}\n\nPlease let me know your availability.\n\nBest regards.`);
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=swarajkrishna90@gmail.com&su=${subject}&body=${body}`, "_blank");
+    });
+  </script>
+</footer>

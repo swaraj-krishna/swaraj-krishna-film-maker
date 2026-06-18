@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>ABOUT ME | Swaraj Krishna</title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: {
+                  primary: "#8B5CF6",
+                  "primary-container": "#6D28D9",
+                },
+                fontFamily: {
+                  "headline": ["Manrope", "sans-serif"],
+                  "body": ["Inter", "sans-serif"],
+                  "label": ["Inter", "sans-serif"],
+                  "antonio": ["Antonio", "sans-serif"]
+                },
+                borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              },
+            },
+          }
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+    </style>
+  </head>
+  <body class="bg-[#FBF9F8] text-[#1B1C1C] font-body selection:bg-primary selection:text-white pt-24">
+
+  <div id="nav"></div>
+
+  <!-- Breadcrumb Banner -->
+  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5">
+    <div class="max-w-screen-2xl mx-auto px-8">
+      <h1 class="font-antonio text-5xl md:text-7xl uppercase font-bold tracking-tight text-black mb-4">About Me</h1>
+      <div class="text-sm uppercase tracking-widest text-primary font-bold">
+        <a href="./index.html" class="hover:text-black transition-colors">Home</a>
+        <span class="mx-3 text-black/35">/</span>
+        <span class="text-black/60">Bio &amp; Journey</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bio & Photo Grid Section -->
+  <section class="py-32 px-8 md:px-20 max-w-screen-2xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      
+      <!-- Photo Grid -->
+      <div class="lg:col-span-6">
+        <div class="grid grid-cols-12 gap-4">
+          <!-- Main Photo -->
+          <div class="col-span-6">
+            <div class="aspect-[3/4] bg-[#F6F3F2] border border-black/5 rounded-sm overflow-hidden shadow-md">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="img/hero/swaraj-photo.png" alt="Swaraj Krishna Portrait"/>
+            </div>
+          </div>
+          <!-- Grid Stack -->
+          <div class="col-span-6 flex flex-col gap-4">
+            <div class="aspect-video bg-[#F6F3F2] border border-black/5 rounded-sm overflow-hidden shadow-md">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="img/hero/IMG_8430.JPG" alt="Swaraj Krishna camera shoot"/>
+            </div>
+            <div class="aspect-square bg-[#F6F3F2] border border-black/5 rounded-sm overflow-hidden shadow-md">
+              <img class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" src="img/hero/DSC08514_SnapseedCopy.jpg" alt="Swaraj Krishna editor desk"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bio Text -->
+      <div class="lg:col-span-6">
+        <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Who am I?</span>
+        <h2 class="font-antonio text-4xl md:text-5xl uppercase mb-8 leading-tight font-bold text-black">Swaraj Krishna T S</h2>
+        
+        <div class="space-y-6 text-black/70 text-lg leading-relaxed mb-10 font-body">
+          <p>I'm a passionate and driven creative at the beginning of my professional journey in filmmaking and video production. With a strong eye for storytelling and visual design, I specialize in creating impactful videos — from concept to final edit.</p>
+          <p>As a filmmaker, VFX artist, cinematographer, and editor, I bring energy, curiosity, and a commitment to precision in every project I take on. Whether it's capturing cinematic footage or adding powerful visual effects, I strive to deliver work that speaks clearly and emotionally.</p>
+          <p>Eager to grow and collaborate, I’m ready to bring fresh ideas and dedication to every frame. Let's build something exceptional together.</p>
+        </div>
+
+        <a href="./contact.html" class="inline-flex items-center gap-3 bg-black hover:bg-black/85 text-white px-8 py-3.5 rounded-sm font-label uppercase tracking-widest text-sm active:scale-95 transition-transform duration-300">
+          Start a Project
+          <span class="material-symbols-outlined">arrow_forward</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Services/Skills Preview Injected Dynamically (Using components/services.html template) -->
+  <div id="services"></div>
+
+  <div id="footer"></div>
+
+  <script>
+    const loadComponent = async (id, file) => {
+      try {
+        const res = await fetch(file);
+        if (!res.ok) throw new Error(res.status);
+        const html = await res.text();
+        const container = document.getElementById(id);
+        container.innerHTML = html;
+        
+        // Execute scripts
+        const scripts = container.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+          newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+          oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+      } catch (err) {
+        console.error(`Error loading ${file}:`, err);
+      }
+    };
+
+    loadComponent("nav", "./components/nav.html");
+    loadComponent("services", "./components/services.html");
+    loadComponent("footer", "./components/footer.html");
+  </script>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+<nav class="fixed top-0 w-full z-50 bg-white/95 text-[#1B1C1C] border-b border-black/5 backdrop-blur-md">
+  <div class="flex items-center justify-between px-6 md:px-12 py-5 max-w-screen-2xl mx-auto relative">
+    <div class="font-['Antonio'] font-bold tracking-tighter text-2xl uppercase">
+      <a href="./index.html" class="hover:text-primary transition-colors duration-300">SWARAJ KRISHNA</a>
+    </div>
+    
+    <!-- Desktop Nav Links -->
+    <div class="hidden md:flex items-center gap-10">
+      <a id="nav-home" class="font-['Antonio'] uppercase tracking-tight text-lg text-black/60 hover:text-black transition-opacity duration-300" href="./index.html">Home</a>
+      <a id="nav-about" class="font-['Antonio'] uppercase tracking-tight text-lg text-black/60 hover:text-black transition-opacity duration-300" href="./about.html">About</a>
+      <a id="nav-work" class="font-['Antonio'] uppercase tracking-tight text-lg text-black/60 hover:text-black transition-opacity duration-300" href="./work.html">Work</a>
+      <a id="nav-skills" class="font-['Antonio'] uppercase tracking-tight text-lg text-black/60 hover:text-black transition-opacity duration-300" href="./skills.html">Skills</a>
+      <a id="nav-contact" class="font-['Antonio'] uppercase tracking-tight text-lg text-black/60 hover:text-black transition-opacity duration-300" href="./contact.html">Contact</a>
+    </div>
+
+    <div class="hidden md:block">
+      <a href="./contact.html" class="bg-black hover:bg-black/85 text-white px-6 py-2.5 rounded-sm font-label uppercase tracking-widest text-xs active:scale-95 transition-transform duration-300">
+        Let's Talk
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Menu Button -->
+    <button id="mobile-menu-btn" class="md:hidden text-black hover:text-primary transition-colors focus:outline-none z-50">
+      <span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
+    </button>
+  </div>
+
+  <!-- Mobile Nav Menu Drawer -->
+  <div id="mobile-drawer" class="fixed inset-0 bg-white/98 text-[#1B1C1C] z-40 flex flex-col justify-center items-center gap-8 translate-x-full transition-transform duration-500 md:hidden">
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./index.html" onclick="toggleMobileMenu()">Home</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./about.html" onclick="toggleMobileMenu()">About</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./work.html" onclick="toggleMobileMenu()">Work</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./skills.html" onclick="toggleMobileMenu()">Skills</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./contact.html" onclick="toggleMobileMenu()">Contact</a>
+    
+    <a href="./contact.html" onclick="toggleMobileMenu()" class="mt-4 bg-black text-white px-8 py-3 rounded-sm font-label uppercase tracking-widest text-sm hover:bg-black/85 transition-colors">
+      Let's Talk
+    </a>
+  </div>
+
+  <script>
+    (function() {
+      const btn = document.getElementById('mobile-menu-btn');
+      const drawer = document.getElementById('mobile-drawer');
+      const icon = document.getElementById('menu-icon');
+
+      if (btn && drawer) {
+        btn.addEventListener('click', () => {
+          const isOpen = !drawer.classList.contains('translate-x-full');
+          if (isOpen) {
+            drawer.classList.add('translate-x-full');
+            icon.textContent = 'menu';
+          } else {
+            drawer.classList.remove('translate-x-full');
+            icon.textContent = 'close';
+          }
+        });
+      }
+
+      window.toggleMobileMenu = function() {
+        if (drawer && icon) {
+          drawer.classList.add('translate-x-full');
+          icon.textContent = 'menu';
+        }
+      }
+
+      // Highlight active nav link based on current page url
+      const path = window.location.pathname;
+      const page = path.split("/").pop();
+      
+      let activeId = '';
+      if (page === 'index.html' || page === '') activeId = 'nav-home';
+      else if (page === 'about.html') activeId = 'nav-about';
+      else if (page === 'work.html') activeId = 'nav-work';
+      else if (page === 'skills.html') activeId = 'nav-skills';
+      else if (page === 'contact.html') activeId = 'nav-contact';
+
+      if (activeId) {
+        const activeEl = document.getElementById(activeId);
+        if (activeEl) {
+          activeEl.classList.remove('text-black/60');
+          activeEl.classList.add('text-primary', 'font-bold', 'border-b-2', 'border-primary', 'pb-0.5');
+        }
+      }
+    })();
+  </script>
+</nav>
