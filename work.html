@@ -67,13 +67,13 @@
   <!-- Showreel Video Hero Banner -->
   <section class="relative h-[65vh] w-full bg-black overflow-hidden flex flex-col justify-center items-center text-center">
     <!-- Background Video -->
-    <video id="hero-video" autoplay loop playsinline muted class="absolute top-50 left-50 w-full h-full min-w-full min-h-full object-cover z-0 pointer-events-none brightness-[0.5]">
+    <video id="hero-video" autoplay loop playsinline muted class="absolute inset-0 w-full h-full object-contain z-0 pointer-events-none brightness-[0.5] blur-[2px] transition-all duration-500">
       <source src="img/Show Reel/VFX-Hightlight.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
     
     <!-- Hero Text Overlay -->
-    <div class="relative z-10 px-8 max-w-4xl">
+    <div id="hero-text-container" class="relative z-10 px-8 max-w-4xl transition-all duration-500">
       <span class="inline-block text-xs font-bold uppercase tracking-[0.4em] text-primary mb-4">VFX &amp; Cinematography Highlight</span>
       <h1 class="font-antonio text-5xl md:text-8xl uppercase font-bold tracking-tight text-white mb-6">Show Reel</h1>
       <p class="text-lg md:text-xl text-white/80 font-body max-w-xl mx-auto leading-relaxed">
@@ -83,11 +83,14 @@
 
     <!-- Video Controls on Bottom Right -->
     <div class="absolute bottom-6 right-6 z-20 flex gap-3">
-      <button id="video-play-btn" class="video-control-btn" title="Play/Pause">
+      <button id="video-play-btn" class="video-control-btn transition-all duration-500" title="Play/Pause">
         <i class="fa fa-pause text-sm" id="video-play-icon"></i>
       </button>
-      <button id="video-mute-btn" class="video-control-btn" title="Mute/Unmute">
+      <button id="video-mute-btn" class="video-control-btn transition-all duration-500" title="Mute/Unmute">
         <i class="fa fa-volume-off text-sm" id="video-mute-icon"></i>
+      </button>
+      <button id="video-toggle-overlay-btn" class="video-control-btn transition-all duration-500" title="Toggle Clean View">
+        <i class="fa fa-eye text-sm" id="video-toggle-overlay-icon"></i>
       </button>
     </div>
   </section>
@@ -479,6 +482,9 @@
       const playIcon = document.getElementById('video-play-icon');
       const muteBtn = document.getElementById('video-mute-btn');
       const muteIcon = document.getElementById('video-mute-icon');
+      const toggleOverlayBtn = document.getElementById('video-toggle-overlay-btn');
+      const toggleOverlayIcon = document.getElementById('video-toggle-overlay-icon');
+      const textContainer = document.getElementById('hero-text-container');
 
       if (video) {
         playBtn?.addEventListener('click', () => {
@@ -502,6 +508,23 @@
             muteIcon.className = 'fa fa-volume-off text-sm';
             muteBtn.style.background = '#1B1C1C';
             muteBtn.style.color = 'white';
+          }
+        });
+
+        toggleOverlayBtn?.addEventListener('click', () => {
+          const isClean = textContainer.classList.contains('opacity-0');
+          if (isClean) {
+            textContainer.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            video.classList.remove('brightness-100', 'blur-none');
+            video.classList.add('brightness-[0.5]', 'blur-[2px]');
+            toggleOverlayIcon.className = 'fa fa-eye text-sm';
+            toggleOverlayBtn.title = 'Toggle Clean View';
+          } else {
+            textContainer.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            video.classList.remove('brightness-[0.5]', 'blur-[2px]');
+            video.classList.add('brightness-100', 'blur-none');
+            toggleOverlayIcon.className = 'fa fa-eye-slash text-sm';
+            toggleOverlayBtn.title = 'Show Text & Controls';
           }
         });
       }
