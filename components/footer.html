@@ -1,18 +1,16 @@
-<footer class="w-full py-20 bg-[#F6F3F2] border-t border-black/5 text-[#1B1C1C]">
+<footer class="w-full pt-12 pb-4 md:py-20 bg-[#F6F3F2] border-t border-black/5 text-[#1B1C1C]">
   <div class="max-w-screen-2xl mx-auto px-8 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
     
-    <!-- Column 1: Brand & Copyright -->
-    <div class="md:col-span-4 flex flex-col justify-between h-full min-h-[150px]">
-      <div>
-        <div class="font-['Antonio'] text-3xl font-bold tracking-tighter mb-4 text-black">
-          <a href="./index.html" class="hover:text-primary transition-colors">SWARAJ KRISHNA</a>
-        </div>
-        <p class="text-black/60 text-sm max-w-xs leading-relaxed font-body">
-          A reflection of passion in motion. From directing and editing to crafting VFX and capturing cinematic frames, each project tells a story that resonates.
-        </p>
+    <!-- Column 1: Brand -->
+    <div class="md:col-span-4">
+      <div class="font-['Antonio'] text-3xl font-bold tracking-tighter mb-4 text-black">
+        <a href="./index.html" class="hover:text-primary transition-colors">SWARAJ KRISHNA</a>
       </div>
-      <div class="text-xs uppercase tracking-widest opacity-50 mt-8 md:mt-0 font-body">
-        © <span id="footer-year">2026</span> SWARAJ KRISHNA. ALL RIGHTS RESERVED.
+      <p class="text-black/60 text-sm max-w-xs leading-relaxed font-body">
+        A reflection of passion in motion. From directing and editing to crafting VFX and capturing cinematic frames, each project tells a story that resonates.
+      </p>
+      <div class="hidden md:block mt-8 text-xs uppercase tracking-widest opacity-50 font-body">
+        © <span class="footer-year">2026</span> SWARAJ KRISHNA. ALL RIGHTS RESERVED.
       </div>
     </div>
 
@@ -21,10 +19,10 @@
       <h5 class="font-antonio text-xl uppercase tracking-wider mb-6 text-black font-bold">Navigation</h5>
       <ul class="space-y-3 font-body text-sm text-black/60">
         <li><a href="./index.html" class="hover:text-primary transition-colors">Home</a></li>
-        <li><a href="./about.html" class="hover:text-primary transition-colors">About Me</a></li>
+        <li><a href="./about.html" class="hover:text-primary transition-colors">About</a></li>
         <li><a href="./work.html" class="hover:text-primary transition-colors">Portfolio</a></li>
-        <li><a href="./skills.html" class="hover:text-primary transition-colors">Skills Details</a></li>
-        <li><a href="./contact.html" class="hover:text-primary transition-colors">Contact Me</a></li>
+        <li><a href="./skills.html" class="hover:text-primary transition-colors">Skills</a></li>
+        <li><a href="./contact.html" class="hover:text-primary transition-colors">Contact</a></li>
       </ul>
     </div>
 
@@ -32,11 +30,9 @@
     <div class="md:col-span-2">
       <h5 class="font-antonio text-xl uppercase tracking-wider mb-6 text-black font-bold">Socials</h5>
       <ul class="space-y-3 font-body text-sm text-black/60">
-        <li><a href="#" class="hover:text-primary transition-colors">Instagram</a></li>
-        <li><a href="#" class="hover:text-primary transition-colors">YouTube</a></li>
-        <li><a href="#" class="hover:text-primary transition-colors">Dribbble</a></li>
-        <li><a href="#" class="hover:text-primary transition-colors">Facebook</a></li>
-        <li><a href="#" class="hover:text-primary transition-colors">Twitter</a></li>
+        <li><a href="https://www.instagram.com/srk.shotx?igsh=dzIyM3pwMTZqYnd1" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors block">srk.shotx</a></li>
+        <li><a href="https://www.instagram.com/cinefx.production?igsh=MXIwNHYwY2JwZWIx" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors block">CineFX (Founder)</a></li>
+        <li><a href="https://www.instagram.com/craftstudionline?igsh=MXNrcmNnODhzZ2YwOQ==" target="_blank" rel="noopener noreferrer" class="hover:text-primary transition-colors block">CraftStudio (Co-Founder)</a></li>
       </ul>
     </div>
 
@@ -55,8 +51,13 @@
 
   </div>
 
+  <!-- Bottom Bar with Copyright (Mobile Only) -->
+  <div class="max-w-screen-2xl mx-auto px-8 border-t border-black/5 pt-6 mt-8 md:hidden text-xs uppercase tracking-widest opacity-50 font-body text-center">
+    © <span class="footer-year">2026</span> SWARAJ KRISHNA. ALL RIGHTS RESERVED.
+  </div>
+
   <script>
-    document.getElementById("footer-year").textContent = new Date().getFullYear();
+    document.querySelectorAll(".footer-year").forEach(el => el.textContent = new Date().getFullYear());
     
     document.getElementById("footer-contact-form")?.addEventListener("submit", function (e) {
       e.preventDefault();
