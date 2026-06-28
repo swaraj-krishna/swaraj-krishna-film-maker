@@ -118,28 +118,6 @@
       nextBtn.addEventListener('click', () => {
         track.scrollBy({ left: getScrollAmount() * 2, behavior: 'smooth' });
       });
-
-      // Auto-scroll every 3s, pause on hover
-      let autoScrollInterval = setInterval(() => {
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (track.scrollLeft >= maxScroll - 5) {
-          track.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-        }
-      }, 3000);
-
-      track.addEventListener('mouseenter', () => clearInterval(autoScrollInterval));
-      track.addEventListener('mouseleave', () => {
-        autoScrollInterval = setInterval(() => {
-          const maxScroll = track.scrollWidth - track.clientWidth;
-          if (track.scrollLeft >= maxScroll - 5) {
-            track.scrollTo({ left: 0, behavior: 'smooth' });
-          } else {
-            track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
-          }
-        }, 3000);
-      });
     }
   })();
 
