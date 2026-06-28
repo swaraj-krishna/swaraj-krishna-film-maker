@@ -128,7 +128,7 @@
       <!-- Video Player -->
       <div id="lightbox-video-container" class="w-full flex flex-col items-center hidden">
         <div class="w-full aspect-video">
-          <iframe id="lightbox-iframe" class="w-full h-full rounded-sm shadow-2xl" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <div id="lightbox-yt-player" class="w-full h-full rounded-sm shadow-2xl"></div>
         </div>
         <a id="lightbox-external-link" href="" target="_blank" class="mt-6 text-white/70 hover:text-white transition-colors font-antonio text-sm tracking-widest uppercase flex items-center gap-2 border border-white/20 px-4 py-2 rounded-full hover:bg-white/10">
           <i class="fa fa-external-link"></i> Watch directly on YouTube
@@ -302,7 +302,14 @@
       { src: 'https://img.youtube.com/vi/U0AXXh_eGic/hqdefault.jpg', url: 'https://youtu.be/U0AXXh_eGic?si=0t0MtHBKYJu-wgAi', description:"AUDI RS4", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/UKCAbphIdDk/hqdefault.jpg', url: 'https://youtu.be/UKCAbphIdDk?si=H5A06SXGmI8W6cZ7', description:"Almaram Band", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/cYNbawvZz6I/hqdefault.jpg', url: 'https://youtu.be/cYNbawvZz6I?si=nbvFfSvoKCfRka7W', description:"AL Azhar Festival", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/0NjZcD3wEI4/hqdefault.jpg', url: 'https://youtu.be/0NjZcD3wEI4?si=cFgC9YbLhH8_5FXE', description:"ADI INSTITUTE", filter: ['editor'] }
+      { src: 'https://img.youtube.com/vi/0NjZcD3wEI4/hqdefault.jpg', url: 'https://youtu.be/0NjZcD3wEI4?si=cFgC9YbLhH8_5FXE', description:"ADI INSTITUTE", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/wwHHrhQC7Qw/hqdefault.jpg', url: 'https://youtu.be/wwHHrhQC7Qw?si=CkHN-pXSJAzf_qhU', description:"Sunset", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/DYC64FTFZg8/hqdefault.jpg', url: 'https://youtube.com/shorts/DYC64FTFZg8?feature=shared', description:"LAQSHYA Festival", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/I1rb7eNVtsY/hqdefault.jpg', url: 'https://youtube.com/shorts/I1rb7eNVtsY?feature=shared', description:"SFX Light", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/45vfKvvgZ08/hqdefault.jpg', url: 'https://youtube.com/shorts/45vfKvvgZ08?feature=shared', description:"Vedan Music", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/0kqA2dPKD3Y/hqdefault.jpg', url: 'https://youtube.com/shorts/0kqA2dPKD3Y?feature=shared', description:"Vidhu Prathap Music", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/L5hx1gXmZf0/hqdefault.jpg', url: 'https://youtube.com/shorts/L5hx1gXmZf0?feature=shared', description:"WAFFEE HOUSE AD", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/bqdS1xow9b4/hqdefault.jpg', url: 'https://youtube.com/shorts/bqdS1xow9b4?feature=shared', description:"Web Series BTS", filter: ['editor'] }
     ];
 
     let allItems = [];
@@ -361,8 +368,10 @@
       filtered.forEach((item, index) => {
         let cardHTML = '';
         if (item.type === 'video') {
+          // Escape single quotes for HTML onclick attribute
+          const safeDesc = item.description.replace(/'/g, "\\'");
           cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('video', '${item.url}', '${item.description}')">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('video', '${item.url}', '${safeDesc}')">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="${item.src}" alt="${item.description}" loading="lazy"/>
                 <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -420,37 +429,76 @@
       renderGrid(filterValue);
     };
 
+    // Inject YouTube IFrame API
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    let ytPlayer = null;
+    let currentVideoSrc = '';
+
     // Lightbox Control
     window.openLightbox = function(type, src, title) {
       const modal = document.getElementById('lightbox-modal');
       const videoCont = document.getElementById('lightbox-video-container');
       const imgCont = document.getElementById('lightbox-image-container');
-      const iframe = document.getElementById('lightbox-iframe');
       const extLink = document.getElementById('lightbox-external-link');
       const img = document.getElementById('lightbox-img');
       const caption = document.getElementById('lightbox-caption');
       
       if (!modal) return;
+      currentVideoSrc = src;
       
       videoCont.classList.add('hidden');
       imgCont.classList.add('hidden');
-      iframe.src = '';
       if(extLink) extLink.href = '';
       img.src = '';
       
       if (type === 'video') {
-        let embedUrl = src;
-        if (embedUrl.includes('watch?v=')) {
-          const id = embedUrl.split('v=').pop().split('&')[0];
-          embedUrl = `https://www.youtube.com/embed/${id}`;
-        } else if (embedUrl.includes('youtu.be/')) {
-          const id = embedUrl.split('youtu.be/').pop().split('?')[0];
-          embedUrl = `https://www.youtube.com/embed/${id}`;
-        } else if (embedUrl.includes('youtube.com/shorts/')) {
-          const id = embedUrl.split('youtube.com/shorts/').pop().split('?')[0];
-          embedUrl = `https://www.youtube.com/embed/${id}`;
+        let ytId = '';
+        if (src.includes('watch?v=')) {
+          ytId = src.split('v=').pop().split('&')[0];
+        } else if (src.includes('youtu.be/')) {
+          ytId = src.split('youtu.be/').pop().split('?')[0];
+        } else if (src.includes('youtube.com/shorts/')) {
+          ytId = src.split('youtube.com/shorts/').pop().split('?')[0];
         }
-        iframe.src = embedUrl + "?autoplay=1";
+
+        const loadYT = () => {
+          if (!ytPlayer) {
+            ytPlayer = new YT.Player('lightbox-yt-player', {
+              videoId: ytId,
+              playerVars: { 'autoplay': 1, 'enablejsapi': 1 },
+              events: {
+                'onReady': function(event) {
+                  event.target.playVideo();
+                },
+                'onError': function(event) {
+                  // 100, 101, 150 typically mean the video owner disabled embedding
+                  if (event.data == 101 || event.data == 150 || event.data == 100) {
+                    closeLightbox();
+                    window.open(currentVideoSrc, '_blank');
+                  }
+                }
+              }
+            });
+            // Reapply styling to the iframe generated by YT
+            setTimeout(() => {
+              const iframe = document.getElementById('lightbox-yt-player');
+              if(iframe) iframe.className = "w-full h-full rounded-sm shadow-2xl";
+            }, 100);
+          } else {
+            ytPlayer.loadVideoById(ytId);
+          }
+        };
+
+        if (typeof YT !== 'undefined' && YT.Player) {
+          loadYT();
+        } else {
+          window.onYouTubeIframeAPIReady = loadYT;
+        }
+
         if(extLink) extLink.href = src;
         videoCont.classList.remove('hidden');
       } else {
@@ -466,11 +514,15 @@
 
     window.closeLightbox = function() {
       const modal = document.getElementById('lightbox-modal');
-      const iframe = document.getElementById('lightbox-iframe');
       if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
-        if (iframe) iframe.src = '';
+        
+        // Stop YouTube video if playing
+        if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
+          ytPlayer.stopVideo();
+        }
+        
         document.body.style.overflow = '';
       }
     };
