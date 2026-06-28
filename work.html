@@ -108,6 +108,17 @@
       </ul>
     </div>
 
+    <!-- Sub-Filter Bar (Cinematographer only) -->
+    <div id="sub-filter-container" class="hidden flex justify-center mb-12 -mt-8 overflow-x-auto w-full transition-all duration-300 opacity-0 transform translate-y-2">
+      <ul class="flex justify-center gap-2 sm:gap-4 md:gap-6 border-b border-black/5 pb-3 px-4 font-antonio text-[10px] sm:text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">
+        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black border-black font-bold whitespace-nowrap" data-subcat="all" onclick="filterSubGallery('all', this)">All</li>
+        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Cinematography</li>
+        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">Bike Photos</li>
+        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">Festival Photos</li>
+        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">Model Photos</li>
+      </ul>
+    </div>
+
     <!-- Gallery Grid -->
     <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 transition-all duration-500">
       <!-- Injected dynamically via script -->
@@ -124,6 +135,15 @@
     <button class="absolute top-6 right-6 text-white hover:text-primary transition-colors focus:outline-none z-50" onclick="closeLightbox()">
       <span class="material-symbols-outlined text-4xl">close</span>
     </button>
+    
+    <!-- Prev/Next Navigation Buttons -->
+    <button id="lightbox-prev-btn" onclick="navigateLightbox(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white hover:bg-white/10 transition-all duration-300 focus:outline-none z-50 w-12 h-12 rounded-full flex items-center justify-center">
+      <span class="material-symbols-outlined text-4xl font-bold">chevron_left</span>
+    </button>
+    <button id="lightbox-next-btn" onclick="navigateLightbox(1)" class="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 hover:text-white hover:bg-white/10 transition-all duration-300 focus:outline-none z-50 w-12 h-12 rounded-full flex items-center justify-center">
+      <span class="material-symbols-outlined text-4xl font-bold">chevron_right</span>
+    </button>
+
     <div class="w-full max-w-4xl max-h-[85vh] flex flex-col items-center justify-center relative">
       <!-- Video Player -->
       <div id="lightbox-video-container" class="w-full flex flex-col items-center hidden">
@@ -311,7 +331,7 @@
       { src: 'https://img.youtube.com/vi/I1rb7eNVtsY/hqdefault.jpg', url: 'https://youtube.com/shorts/I1rb7eNVtsY?feature=shared', description:"SFX Light", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/45vfKvvgZ08/hqdefault.jpg', url: 'https://youtube.com/shorts/45vfKvvgZ08?feature=shared', description:"Vedan Music", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/NDH-Agtmmf8/hqdefault.jpg', url: 'https://youtube.com/shorts/NDH-Agtmmf8?feature=shared', description:"Kirtiii Model", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/0kqA2dPKD3Y/hqdefault.jpg', url: 'https://youtube.com/shorts/0kqA2dPKD3Y?feature=shared', description:"Vidhu Prathap Music", filter: ['editor'] },
+    { src: 'https://img.youtube.com/vi/0kqA2dPKD3Y/hqdefault.jpg', url: 'https://youtube.com/shorts/0kqA2dPKD3Y?feature=shared', description:"Vidhu Prathap Music", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/U0AXXh_eGic/hqdefault.jpg', url: 'https://youtu.be/U0AXXh_eGic?si=0t0MtHBKYJu-wgAi', description:"AUDI RS4", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/ZFZgfKz5Mx4/hqdefault.jpg', url: 'https://youtube.com/shorts/ZFZgfKz5Mx4?feature=shared', description:"JF GYM WORK", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/-iSx71_ZaXo/hqdefault.jpg', url: 'https://youtube.com/shorts/-iSx71_ZaXo?feature=shared', description:"GYM WORK2", filter: ['editor'] },
@@ -319,6 +339,10 @@
     ];
 
     let allItems = [];
+    let currentMainFilter = 'all';
+    let currentSubcategory = 'all';
+    let currentGalleryItems = [];
+    let currentLightboxIndex = -1;
 
     // Compile videos
     portfolioVideos.forEach(v => {
@@ -327,7 +351,8 @@
         src: v.src,
         url: v.url,
         description: v.description,
-        filters: v.filter
+        filters: v.filter,
+        subcategory: 'all'
       });
     });
 
@@ -345,6 +370,7 @@
             type: 'image',
             src: img,
             filters: [category],
+            subcategory: folderId,
             description: folder.title
           });
         }
@@ -352,15 +378,21 @@
     });
 
     // Render Function
-    function renderGrid(filterValue) {
+    function renderGrid() {
       const grid = document.getElementById('gallery-grid');
       const emptyState = document.getElementById('gallery-empty');
       grid.innerHTML = '';
       
       const filtered = allItems.filter(item => {
-        if (filterValue === 'all') return true;
-        return item.filters.includes(filterValue);
+        const matchesMain = (currentMainFilter === 'all' || item.filters.includes(currentMainFilter));
+        let matchesSub = true;
+        if (currentMainFilter === 'cinematographer' && currentSubcategory && currentSubcategory !== 'all') {
+          matchesSub = (item.subcategory === currentSubcategory);
+        }
+        return matchesMain && matchesSub;
       });
+
+      currentGalleryItems = filtered;
 
       if (filtered.length === 0) {
         emptyState.classList.remove('hidden');
@@ -374,10 +406,8 @@
       filtered.forEach((item, index) => {
         let cardHTML = '';
         if (item.type === 'video') {
-          // Escape single quotes for HTML onclick attribute
-          const safeDesc = item.description.replace(/'/g, "\\'");
           cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('video', '${item.url}', '${safeDesc}')">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox(${index})">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="${item.src}" alt="${item.description}" loading="lazy"/>
                 <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -397,7 +427,7 @@
           `;
         } else {
           cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox('image', '${item.src}', '${item.description}')">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500 opacity-0 scale-95 transform" style="animation: fadeInUp 0.4s ease forwards ${index * 15}ms" onclick="openLightbox(${index})">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="${item.src}" alt="${item.description}" loading="lazy"/>
                 <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -420,9 +450,78 @@
       });
     }
 
+    // Helper to update query parameters in URL
+    function updateQueryParams() {
+      const url = new URL(window.location);
+      
+      if (currentMainFilter && currentMainFilter !== 'all') {
+        if (currentMainFilter === 'cinematographer') {
+          url.searchParams.set('filter', 'cinmeatory');
+        } else {
+          url.searchParams.set('filter', currentMainFilter);
+        }
+      } else {
+        url.searchParams.delete('filter');
+      }
+
+      if (currentMainFilter === 'cinematographer' && currentSubcategory && currentSubcategory !== 'all') {
+        let urlCat = currentSubcategory;
+        if (urlCat === 'bike-photography') {
+          urlCat = 'bikepohotgrpahy';
+        } else if (urlCat === 'models') {
+          urlCat = 'modelphotos';
+        } else if (urlCat === 'festival-photography') {
+          urlCat = 'festivalphotos';
+        }
+        url.searchParams.set('cateography', urlCat);
+        url.searchParams.delete('category');
+      } else {
+        url.searchParams.delete('cateography');
+        url.searchParams.delete('category');
+      }
+      
+      window.history.pushState({}, '', url);
+    }
+
+    // Helper to copy current URL to clipboard
+    function copyCurrentLinkToClipboard() {
+      const currentUrl = window.location.href;
+      navigator.clipboard.writeText(currentUrl).then(() => {
+        showCopyNotification();
+      }).catch(err => {
+        console.error('Failed to copy link: ', err);
+      });
+    }
+
+    // Helper to show a premium toast notification
+    function showCopyNotification() {
+      let toast = document.getElementById('filter-toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'filter-toast';
+        toast.className = 'fixed bottom-6 right-6 bg-[#1B1C1C] text-white text-xs font-antonio tracking-widest uppercase px-5 py-3 rounded-sm shadow-2xl z-50 transition-all duration-300 transform translate-y-10 opacity-0 border border-white/10 flex items-center gap-2';
+        toast.innerHTML = '<span class="material-symbols-outlined text-sm text-primary">link</span> Link copied to clipboard';
+        document.body.appendChild(toast);
+      }
+      
+      if (toast.timeoutId) {
+        clearTimeout(toast.timeoutId);
+      }
+      
+      toast.classList.remove('hidden');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-10', 'opacity-0');
+        toast.classList.add('translate-y-0', 'opacity-100');
+      }, 50);
+
+      toast.timeoutId = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-10', 'opacity-0');
+      }, 2000);
+    }
+
     // Filter Trigger Function
     window.filterGallery = function(filterValue, element) {
-      // Toggle nav class
       const items = element.parentNode.querySelectorAll('li');
       items.forEach(li => {
         li.classList.remove('text-black', 'border-black', 'font-bold');
@@ -431,8 +530,56 @@
       element.classList.remove('text-black/60', 'border-transparent');
       element.classList.add('text-black', 'border-black', 'font-bold');
       
-      // Render
-      renderGrid(filterValue);
+      currentMainFilter = filterValue;
+      currentSubcategory = 'all'; // reset on main filter switch
+
+      const subcontainer = document.getElementById('sub-filter-container');
+      if (filterValue === 'cinematographer') {
+        subcontainer.classList.remove('hidden');
+        // Reset subcategory active highlight
+        const subItems = subcontainer.querySelectorAll('li');
+        subItems.forEach(li => {
+          li.classList.remove('text-black', 'border-black', 'font-bold');
+          li.classList.add('text-black/60', 'border-transparent');
+        });
+        const defaultSub = subcontainer.querySelector('[data-subcat="all"]');
+        if (defaultSub) {
+          defaultSub.classList.remove('text-black/60', 'border-transparent');
+          defaultSub.classList.add('text-black', 'border-black', 'font-bold');
+        }
+        
+        setTimeout(() => {
+          subcontainer.classList.remove('opacity-0', 'translate-y-2');
+          subcontainer.classList.add('opacity-100', 'translate-y-0');
+        }, 50);
+      } else {
+        subcontainer.classList.add('opacity-0', 'translate-y-2');
+        subcontainer.classList.remove('opacity-100', 'translate-y-0');
+        setTimeout(() => {
+          subcontainer.classList.add('hidden');
+        }, 300);
+      }
+
+      updateQueryParams();
+      renderGrid();
+      copyCurrentLinkToClipboard();
+    };
+
+    // Sub-Filter Trigger Function
+    window.filterSubGallery = function(subcatValue, element) {
+      const items = element.parentNode.querySelectorAll('li');
+      items.forEach(li => {
+        li.classList.remove('text-black', 'border-black', 'font-bold');
+        li.classList.add('text-black/60', 'border-transparent');
+      });
+      element.classList.remove('text-black/60', 'border-transparent');
+      element.classList.add('text-black', 'border-black', 'font-bold');
+
+      currentSubcategory = subcatValue;
+
+      updateQueryParams();
+      renderGrid();
+      copyCurrentLinkToClipboard();
     };
 
     // Inject YouTube IFrame API
@@ -445,7 +592,7 @@
     let currentVideoSrc = '';
 
     // Lightbox Control
-    window.openLightbox = function(type, src, title) {
+    window.openLightbox = function(index) {
       const modal = document.getElementById('lightbox-modal');
       const videoCont = document.getElementById('lightbox-video-container');
       const imgCont = document.getElementById('lightbox-image-container');
@@ -454,13 +601,37 @@
       const caption = document.getElementById('lightbox-caption');
       
       if (!modal) return;
+      
+      currentLightboxIndex = index;
+      const item = currentGalleryItems[index];
+      if (!item) return;
+
+      const type = item.type;
+      const src = item.type === 'video' ? item.url : item.src;
+      const title = item.description;
+
       currentVideoSrc = src;
       
+      if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
+        ytPlayer.stopVideo();
+      }
+
       videoCont.classList.add('hidden');
       imgCont.classList.add('hidden');
       if(extLink) extLink.href = '';
       img.src = '';
       
+      // Manage nav buttons visibility
+      const prevBtn = document.getElementById('lightbox-prev-btn');
+      const nextBtn = document.getElementById('lightbox-next-btn');
+      if (currentGalleryItems.length <= 1) {
+        if (prevBtn) prevBtn.classList.add('hidden');
+        if (nextBtn) nextBtn.classList.add('hidden');
+      } else {
+        if (prevBtn) prevBtn.classList.remove('hidden');
+        if (nextBtn) nextBtn.classList.remove('hidden');
+      }
+
       if (type === 'video') {
         let ytId = '';
         if (src.includes('watch?v=')) {
@@ -518,13 +689,25 @@
       document.body.style.overflow = 'hidden';
     };
 
+    window.navigateLightbox = function(direction) {
+      if (currentLightboxIndex === -1 || currentGalleryItems.length === 0) return;
+      
+      let newIndex = currentLightboxIndex + direction;
+      if (newIndex < 0) {
+        newIndex = currentGalleryItems.length - 1;
+      } else if (newIndex >= currentGalleryItems.length) {
+        newIndex = 0;
+      }
+      
+      openLightbox(newIndex);
+    };
+
     window.closeLightbox = function() {
       const modal = document.getElementById('lightbox-modal');
       if (modal) {
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         
-        // Stop YouTube video if playing
         if (ytPlayer && typeof ytPlayer.stopVideo === 'function') {
           ytPlayer.stopVideo();
         }
@@ -539,19 +722,87 @@
       }
     });
 
+    // Handle keyboard navigation for lightbox
+    document.addEventListener('keydown', function(e) {
+      const modal = document.getElementById('lightbox-modal');
+      if (modal && !modal.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft') {
+          navigateLightbox(-1);
+        } else if (e.key === 'ArrowRight') {
+          navigateLightbox(1);
+        } else if (e.key === 'Escape') {
+          closeLightbox();
+        }
+      }
+    });
+
     // Check query params for active filter
     document.addEventListener("DOMContentLoaded", () => {
       const urlParams = new URLSearchParams(window.location.search);
-      const filter = urlParams.get('filter');
-      
+      let filter = urlParams.get('filter');
+      let category = urlParams.get('category') || urlParams.get('cateography');
+
+      // Normalize parameters
+      if (filter) {
+        filter = filter.trim().toLowerCase();
+        if (filter === 'cinmeatory') {
+          filter = 'cinematographer';
+        }
+      }
+
+      if (category) {
+        category = category.trim().toLowerCase();
+        if (category === 'bikepohotgrpahy' || category === 'bikephotos' || category === 'bike-photos') {
+          category = 'bike-photography';
+        } else if (category === 'modelphotography' || category === 'model-photography' || category === 'modelphotos' || category === 'model-photos') {
+          category = 'models';
+        } else if (category === 'festivalphotos' || category === 'festival-photos') {
+          category = 'festival-photography';
+        }
+      }
+
       if (filter) {
         const filterItem = document.querySelector(`li[data-filter="${filter}"]`);
         if (filterItem) {
-          filterGallery(filter, filterItem);
+          currentMainFilter = filter;
+
+          // Toggle main gallery filter highlight
+          const items = filterItem.parentNode.querySelectorAll('li');
+          items.forEach(li => {
+            li.classList.remove('text-black', 'border-black', 'font-bold');
+            li.classList.add('text-black/60', 'border-transparent');
+          });
+          filterItem.classList.remove('text-black/60', 'border-transparent');
+          filterItem.classList.add('text-black', 'border-black', 'font-bold');
+
+          // Handle sub-filter layout if cinematographer
+          if (filter === 'cinematographer') {
+            const subcontainer = document.getElementById('sub-filter-container');
+            subcontainer.classList.remove('hidden');
+            subcontainer.classList.remove('opacity-0', 'translate-y-2');
+            subcontainer.classList.add('opacity-100', 'translate-y-0');
+
+            if (category) {
+              currentSubcategory = category;
+              const subItem = subcontainer.querySelector(`[data-subcat="${category}"]`);
+              if (subItem) {
+                const subItems = subItem.parentNode.querySelectorAll('li');
+                subItems.forEach(li => {
+                  li.classList.remove('text-black', 'border-black', 'font-bold');
+                  li.classList.add('text-black/60', 'border-transparent');
+                });
+                subItem.classList.remove('text-black/60', 'border-transparent');
+                subItem.classList.add('text-black', 'border-black', 'font-bold');
+              }
+            }
+          }
+          
+          renderGrid();
           return;
         }
       }
-      renderGrid('all');
+      
+      renderGrid();
     });
   </script>
 
