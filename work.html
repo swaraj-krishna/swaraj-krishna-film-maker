@@ -112,7 +112,7 @@
     <div id="sub-filter-container" class="hidden flex justify-center mb-12 -mt-8 overflow-x-auto w-full transition-all duration-300 opacity-0 transform translate-y-2">
       <ul class="flex justify-center gap-2 sm:gap-4 md:gap-6 border-b border-black/5 pb-3 px-4 font-antonio text-[10px] sm:text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">
         <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black border-black font-bold whitespace-nowrap" data-subcat="all" onclick="filterSubGallery('all', this)">All</li>
-        <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Cinematography</li>
+        <!-- <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Cinematography</li> -->
         <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">Bike Photos</li>
         <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">Festival Photos</li>
         <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">Model Photos</li>
@@ -310,7 +310,7 @@
     };
 
     const portfolioVideos = [
-      { src: 'https://img.youtube.com/vi/sB6Y8W7Ay94/hqdefault.jpg', url: 'https://youtu.be/sB6Y8W7Ay94?feature=shared', description:"Nightmare In The Shadow", filter: ['vfxartist'] },
+      { src: 'https://i.ytimg.com/vi/gAo7KFSM32M/hqdefault.jpg', url: 'https://www.youtube.com/watch?v=gAo7KFSM32M', description:"Nightmare In The Shadow", filter: ['vfxartist'] },
       { src: 'img/portfolio/foodadvfx.png', url: 'https://youtu.be/ECdSHubQGi8?si=CpiKRRDoNOVTuQmn', description:"KHUSRU FOODS AD", filter: ['vfxartist'] },
       { src: 'img/portfolio/paperboat.png', url: 'https://m.youtube.com/watch?v=5XdWwAL--mQ', description:"PAPERBOAT - AD", filter: ['vfxartist'] },
       { src: 'img/portfolio/kappiri.png', url: 'https://youtu.be/FXr-2BpS4Po?si=4ENMvQX2Tk3CHRfu', description:"KAPPIRI-Documentary", filter: ['vfxartist'] },
@@ -418,7 +418,7 @@
               </div>
               <div class="p-4 bg-white border-t border-black/5 flex justify-between items-center">
                 <div>
-                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">Video / VFX</span>
+                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">Video</span>
                   <h3 class="font-antonio text-sm sm:text-base uppercase text-black font-bold truncate max-w-[150px] sm:max-w-[170px]">${item.description}</h3>
                 </div>
                 <span class="material-symbols-outlined text-black/30 group-hover:text-primary transition-colors">arrow_outward</span>
