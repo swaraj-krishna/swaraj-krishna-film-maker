@@ -115,7 +115,7 @@
     <div class="w-full max-w-4xl max-h-[85vh] flex flex-col items-center justify-center relative">
       <!-- Video Player Container -->
       <div id="home-lightbox-video-container" class="w-full aspect-video hidden">
-        <iframe id="home-lightbox-iframe" class="w-full h-full rounded-sm" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <div id="home-lightbox-yt-player" class="w-full h-full rounded-sm"></div>
       </div>
       <!-- Image Viewer Container -->
       <div id="home-lightbox-image-container" class="max-w-full max-h-full hidden flex flex-col items-center">
@@ -126,31 +126,82 @@
   </div>
 
   <script>
+    // Inject YouTube IFrame API if not already present
+    if (!window.YT_API_LOADED) {
+      const tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      const firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      window.YT_API_LOADED = true;
+    }
+
+    let homeYtPlayer = null;
+    let currentHomeVideoSrc = '';
+
     window.openHomeLightbox = function(type, src, title) {
       const lightbox = document.getElementById('home-lightbox');
       const videoCont = document.getElementById('home-lightbox-video-container');
       const imgCont = document.getElementById('home-lightbox-image-container');
-      const iframe = document.getElementById('home-lightbox-iframe');
       const img = document.getElementById('home-lightbox-img');
       const caption = document.getElementById('home-lightbox-caption');
       
       if (!lightbox) return;
+      currentHomeVideoSrc = src;
       
       videoCont.classList.add('hidden');
       imgCont.classList.add('hidden');
-      iframe.src = '';
       img.src = '';
       
+      if (homeYtPlayer && typeof homeYtPlayer.stopVideo === 'function') {
+        homeYtPlayer.stopVideo();
+      }
+      
       if (type === 'video') {
-        let embedUrl = src;
-        if (embedUrl.includes('watch?v=')) {
-          const id = embedUrl.split('v=').pop().split('&')[0];
-          embedUrl = `https://www.youtube.com/embed/${id}`;
-        } else if (embedUrl.includes('youtu.be/')) {
-          const id = embedUrl.split('youtu.be/').pop().split('?')[0];
-          embedUrl = `https://www.youtube.com/embed/${id}`;
+        let ytId = '';
+        if (src.includes('watch?v=')) {
+          ytId = src.split('v=').pop().split('&')[0];
+        } else if (src.includes('youtu.be/')) {
+          ytId = src.split('youtu.be/').pop().split('?')[0];
+        } else if (src.includes('youtube.com/shorts/')) {
+          ytId = src.split('youtube.com/shorts/').pop().split('?')[0];
         }
-        iframe.src = embedUrl + "?autoplay=1";
+
+        const loadHomeYT = () => {
+          if (!homeYtPlayer) {
+            homeYtPlayer = new YT.Player('home-lightbox-yt-player', {
+              videoId: ytId,
+              playerVars: { 'autoplay': 1, 'enablejsapi': 1 },
+              events: {
+                'onReady': function(event) {
+                  event.target.playVideo();
+                },
+                'onError': function(event) {
+                  if (event.data == 101 || event.data == 150 || event.data == 100) {
+                    closeHomeLightbox();
+                    window.open(currentHomeVideoSrc, '_blank');
+                  }
+                }
+              }
+            });
+            setTimeout(() => {
+              const iframe = document.getElementById('home-lightbox-yt-player');
+              if(iframe) iframe.className = "w-full h-full rounded-sm shadow-2xl";
+            }, 100);
+          } else {
+            homeYtPlayer.loadVideoById(ytId);
+          }
+        };
+
+        if (typeof YT !== 'undefined' && YT.Player) {
+          loadHomeYT();
+        } else {
+          const oldCallback = window.onYouTubeIframeAPIReady;
+          window.onYouTubeIframeAPIReady = function() {
+            if (oldCallback) oldCallback();
+            loadHomeYT();
+          };
+        }
+
         videoCont.classList.remove('hidden');
       } else {
         img.src = src;
@@ -165,11 +216,14 @@
 
     window.closeHomeLightbox = function() {
       const lightbox = document.getElementById('home-lightbox');
-      const iframe = document.getElementById('home-lightbox-iframe');
       if (lightbox) {
         lightbox.classList.add('hidden');
         lightbox.classList.remove('flex');
-        if (iframe) iframe.src = '';
+        
+        if (homeYtPlayer && typeof homeYtPlayer.stopVideo === 'function') {
+          homeYtPlayer.stopVideo();
+        }
+        
         document.body.style.overflow = '';
       }
     };
