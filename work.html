@@ -8,7 +8,8 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <!-- Font Awesome for video control icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
           tailwind.config = {
@@ -37,6 +38,13 @@
       .glass-effect {
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
+      }
+      @keyframes bounceSubtle {
+        0%, 100% { transform: translate(-50%, 0); }
+        50% { transform: translate(-50%, -6px); }
+      }
+      .animate-bounce-subtle {
+        animation: bounceSubtle 1.2s infinite ease-in-out;
       }
       .video-control-btn {
         width: 44px;
@@ -71,6 +79,8 @@
       <source src="img/Show Reel/VFX-Hightlight.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
+    <!-- Background Image (Hidden by default) -->
+    <img id="hero-bg-img" class="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none brightness-[0.5] blur-[2px] transition-all duration-500 hidden" src="" alt="Hero Background"/>
     
     <!-- Hero Text Overlay -->
     <div id="hero-text-container" class="relative z-10 px-8 max-w-4xl transition-all duration-500">
@@ -82,7 +92,7 @@
     </div>
 
     <!-- Video Controls on Bottom Right -->
-    <div class="absolute bottom-6 right-6 z-20 flex gap-3">
+    <div id="hero-video-controls" class="absolute bottom-6 right-6 z-20 flex gap-3">
       <button id="video-play-btn" class="video-control-btn transition-all duration-500" title="Play/Pause">
         <i class="fa fa-pause text-sm" id="video-play-icon"></i>
       </button>
@@ -111,20 +121,27 @@
     <!-- Sub-Filter Bar (Cinematographer only) -->
     <div id="sub-filter-container" class="hidden relative flex flex-col items-center gap-4 mb-12 -mt-8 px-4 w-full transition-all duration-300 opacity-0 transform translate-y-2">
       <div class="overflow-x-auto scrollbar-none w-full flex justify-center">
-        <ul id="sub-filter-list" class="hidden flex justify-center gap-2 sm:gap-4 md:gap-6 border-b border-black/5 pb-3 font-antonio text-[10px] sm:text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">
+        <ul id="sub-filter-list" class="flex justify-center gap-2 sm:gap-4 md:gap-6 border-b border-black/5 pb-3 font-antonio text-[10px] sm:text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black border-black font-bold whitespace-nowrap" data-subcat="all" onclick="filterSubGallery('all', this)">All</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Cinematography</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Location BTS</li>
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">Bike Photos</li>
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">Festival Photos</li>
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">Model Photos</li>
         </ul>
       </div>
       
-      <!-- View Toggle Button -->
-      <button id="view-toggle-btn" class="shrink-0 mt-2 md:mt-0 md:absolute md:right-6 md:top-1/2 md:-translate-y-1/2 px-4 py-2 border border-black/15 hover:border-black rounded-sm flex items-center justify-center gap-2 font-antonio text-xs uppercase tracking-widest text-black/75 hover:text-black hover:bg-black hover:text-white transition-all duration-300 shadow-sm" onclick="toggleGalleryView()">
-        <span id="view-toggle-icon" class="material-symbols-outlined text-base">grid_view</span>
-        <span id="view-toggle-text">Grid View</span>
-      </button>
+      <!-- View Toggle Button and Tooltip Wrapper -->
+      <div class="relative mt-2 min-[900px]:mt-0 min-[900px]:absolute min-[900px]:right-6 min-[900px]:top-1/2 min-[900px]:-translate-y-1/2">
+        <button id="view-toggle-btn" class="shrink-0 px-4 py-2 border border-black/15 hover:border-black rounded-sm flex items-center justify-center gap-2 font-antonio text-xs uppercase tracking-widest text-black/75 hover:text-black hover:bg-black hover:text-white transition-all duration-300 shadow-sm" onclick="toggleGalleryView()">
+          <span id="view-toggle-icon" class="material-symbols-outlined text-base">folder</span>
+          <span id="view-toggle-text">Folder View</span>
+        </button>
+        <!-- Onboarding Tooltip (Disappears after 3 seconds) -->
+        <div id="toggle-tooltip" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 text-black text-[9px] font-antonio tracking-widest uppercase py-1 px-2 z-30 transition-all duration-500 opacity-0 transform translate-y-2 pointer-events-none flex flex-col items-center justify-center font-bold">
+          <span class="text-center leading-normal">Click here to change layout</span>
+          <span class="material-symbols-outlined text-sm mt-0.5">arrow_downward</span>
+        </div>
+      </div>
     </div>
 
     <!-- Folder View Header (Hidden by default) -->
@@ -211,7 +228,7 @@
         ]
       },
       "cinematography": {
-        "title": "Cinematography",
+        "title": "Location BTS",
         "images": [
           "img/Cinematographer/Cinematogrpahy/0C6A9756.JPG",
           "img/Cinematographer/Cinematogrpahy/DSC01717 2.jpg",
@@ -226,6 +243,12 @@
       "bike-photography": {
         "title": "Bike Photography",
         "images": [
+          "img/Cinematographer/Bike Photography/IMG_7677.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7705.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7790.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7850.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7866.JPG",
+          "img/Cinematographer/Bike Photography/IMG_7873.JPG",
           "img/Cinematographer/Bike Photography/DSC00188.JPG", 
           "img/Cinematographer/Bike Photography/DSC00191.JPG",
           "img/Cinematographer/Bike Photography/DSC00923.JPG",
@@ -236,16 +259,7 @@
           "img/Cinematographer/Bike Photography/IMG_5926.JPG",
           "img/Cinematographer/Bike Photography/IMG_6153.JPG",
           "img/Cinematographer/Bike Photography/IMG_6157.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7677.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7705.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7790.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7850.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7866.JPG",
-          "img/Cinematographer/Bike Photography/IMG_7873.JPG",
           "img/Cinematographer/Bike Photography/IMG_9230.JPG",
-          "img/Cinematographer/Bike Photography/IMG_9356_jpg.JPG",
-          "img/Cinematographer/Bike Photography/IMG_9614.JPG",
-          "img/Cinematographer/Bike Photography/IMG_9840.JPG",
           "img/Cinematographer/Bike Photography/IMG_9845.JPG",
           "img/Cinematographer/Bike Photography/IMG_9885.JPG",
           "img/Cinematographer/Bike Photography/IMG_9897.JPG",
@@ -258,7 +272,10 @@
           "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.24.52 PM_SnapseedCopy.jpg",
           "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.28.09 PM.JPG",
           "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.31.50 PM.jpg",
-          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.36.40 PM.JPG"
+          "img/Cinematographer/Bike Photography/Screenshot 2025-09-01 at 7.36.40 PM.JPG",
+           "img/Cinematographer/Bike Photography/IMG_9356_jpg.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9614.JPG",
+          "img/Cinematographer/Bike Photography/IMG_9840.JPG",
         ]
       },
       "car-photography": {
@@ -360,7 +377,7 @@
     let currentSubcategory = 'all';
     let currentGalleryItems = [];
     let currentLightboxIndex = -1;
-    let currentGalleryView = 'folder'; // 'grid' or 'folder'
+    let currentGalleryView = 'grid'; // 'grid' or 'folder'
     let currentOpenFolder = null; // null or folder ID
 
     // Compile videos
@@ -421,10 +438,10 @@
         grid.classList.remove('hidden');
         
         const folders = [
-          { id: 'cinematography', title: 'Cinematography', cover: 'img/Cinematographer/Cinematogrpahy/DSC01831.JPG', position: '' },
+          { id: 'cinematography', title: 'Location BTS', cover: 'img/Cinematographer/Cinematogrpahy/DSC01831.JPG', position: '' },
           { id: 'bike-photography', title: 'Bike Photos', cover: 'img/Cinematographer/Bike Photography/ld-export-b1107463-02222023.JPG', position: 'object-[50%_70%]' },
           { id: 'festival-photography', title: 'Festival Photos', cover: '', position: '' },
-          { id: 'models', title: 'Model Photos', cover: '', position: 'object-[50%_40%]' }
+          { id: 'models', title: 'Model Photos', cover: 'img/Cinematographer/Models/IMG_8442.PNG', position: 'object-[50%_40%]' }
         ];
 
         folders.forEach((f, index) => {
@@ -459,7 +476,7 @@
           folderHeader.classList.remove('hidden');
           const folderTitleEl = document.getElementById('folder-title-text');
           const folderTitles = {
-            'cinematography': 'Cinematography',
+            'cinematography': 'Location BTS',
             'bike-photography': 'Bike Photos',
             'festival-photography': 'Festival Photos',
             'models': 'Model Photos'
@@ -489,6 +506,7 @@
         return;
       } else {
         emptyState.classList.add('hidden');
+        grid.classList.add('hidden');
         grid.classList.remove('hidden');
       }
 
@@ -611,6 +629,80 @@
       }, 2000);
     }
 
+    // Helper to trigger onboarding tooltip animation
+    function showOnboardingTooltip() {
+      if (window.innerWidth < 900) return; // No onboarding tooltip for smaller screens
+      const tooltip = document.getElementById('toggle-tooltip');
+      if (!tooltip) return;
+      
+      if (window.tooltipTimeout) clearTimeout(window.tooltipTimeout);
+      if (window.tooltipHideTimeout) clearTimeout(window.tooltipHideTimeout);
+
+      tooltip.classList.remove('hidden');
+      
+      setTimeout(() => {
+        tooltip.classList.remove('opacity-0', 'translate-y-2');
+        tooltip.classList.add('opacity-100', 'translate-y-0', 'animate-bounce-subtle');
+      }, 50);
+
+      window.tooltipTimeout = setTimeout(() => {
+        tooltip.classList.remove('opacity-100', 'translate-y-0', 'animate-bounce-subtle');
+        tooltip.classList.add('opacity-0', 'translate-y-2');
+        
+        window.tooltipHideTimeout = setTimeout(() => {
+          tooltip.classList.add('hidden');
+        }, 500);
+      }, 5000);
+    }
+    
+    // Helper to update dynamic hero media and text values
+    function updateHeroBanner(filterValue) {
+      const heroVideo = document.getElementById('hero-video');
+      const heroBgImg = document.getElementById('hero-bg-img');
+      const videoControls = document.getElementById('hero-video-controls');
+      const heroTagline = document.querySelector('#hero-text-container span');
+      const heroTitle = document.querySelector('#hero-text-container h1');
+      const heroDesc = document.querySelector('#hero-text-container p');
+
+      if (filterValue === 'all' || filterValue === 'vfxartist') {
+        if (heroVideo) {
+          heroVideo.classList.remove('hidden');
+          heroVideo.play().catch(err => console.log('Video play interrupted:', err));
+        }
+        if (heroBgImg) heroBgImg.classList.add('hidden');
+        if (videoControls) videoControls.classList.remove('hidden');
+        
+        if (heroTagline) heroTagline.textContent = 'VFX & Cinematography Highlight';
+        if (heroTitle) heroTitle.textContent = 'Show Reel';
+        if (heroDesc) heroDesc.textContent = 'Explore a curated compilation of visual effects compositing, professional camera movement, and high-precision color editing.';
+      } else {
+        if (heroVideo) {
+          heroVideo.classList.add('hidden');
+          heroVideo.pause();
+        }
+        if (heroBgImg) {
+          heroBgImg.classList.remove('hidden');
+          if (filterValue === 'cinematographer') {
+            heroBgImg.src = 'img/Cinematographer/Cinematogrpahy/DSC01831.JPG';
+            if (heroTagline) heroTagline.textContent = 'Visual Craftsmanship';
+            if (heroTitle) heroTitle.textContent = 'Cinematography';
+            if (heroDesc) heroDesc.textContent = 'Curated professional camera movement, composition, and visual lighting setups.';
+          } else if (filterValue === 'editor') {
+            heroBgImg.src = 'img/Cinematographer/Cinematogrpahy/0C6A9756.JPG';
+            if (heroTagline) heroTagline.textContent = 'Post Production';
+            if (heroTitle) heroTitle.textContent = 'Film Editing';
+            if (heroDesc) heroDesc.textContent = 'Seamless narrative pacing, dynamic sound design, and color grading.';
+          } else if (filterValue === 'achivements') {
+            heroBgImg.src = 'img/Others/Achivements/IMG_8585.jpg';
+            if (heroTagline) heroTagline.textContent = 'Milestones & Recognition';
+            if (heroTitle) heroTitle.textContent = 'Achievements';
+            if (heroDesc) heroDesc.textContent = 'Recognized works, certifications, and project screenings.';
+          }
+        }
+        if (videoControls) videoControls.classList.add('hidden');
+      }
+    }
+
     // Filter Trigger Function
     window.filterGallery = function(filterValue, element) {
       const items = element.parentNode.querySelectorAll('li');
@@ -623,20 +715,21 @@
       
       currentMainFilter = filterValue;
       currentSubcategory = 'all'; // reset on main filter switch
+      updateHeroBanner(filterValue);
 
       const subcontainer = document.getElementById('sub-filter-container');
       if (filterValue === 'cinematographer') {
         subcontainer.classList.remove('hidden');
         
-        // Reset subcategory view to default Folder View
-        currentGalleryView = 'folder';
+        // Reset subcategory view to default Grid View
+        currentGalleryView = 'grid';
         currentOpenFolder = null;
         const subcatList = document.getElementById('sub-filter-list');
-        if (subcatList) subcatList.classList.add('hidden');
+        if (subcatList) subcatList.classList.remove('hidden');
         const toggleIcon = document.getElementById('view-toggle-icon');
         const toggleText = document.getElementById('view-toggle-text');
-        if (toggleIcon) toggleIcon.textContent = 'grid_view';
-        if (toggleText) toggleText.textContent = 'Grid View';
+        if (toggleIcon) toggleIcon.textContent = 'folder';
+        if (toggleText) toggleText.textContent = 'Folder View';
 
         // Reset subcategory active highlight
         const subItems = subcontainer.querySelectorAll('li');
@@ -653,6 +746,7 @@
         setTimeout(() => {
           subcontainer.classList.remove('opacity-0', 'translate-y-2');
           subcontainer.classList.add('opacity-100', 'translate-y-0');
+          showOnboardingTooltip();
         }, 50);
       } else {
         subcontainer.classList.add('opacity-0', 'translate-y-2');
@@ -685,6 +779,10 @@
     };
 
     window.toggleGalleryView = function() {
+      // Hide tooltip immediately if clicked
+      const tooltip = document.getElementById('toggle-tooltip');
+      if (tooltip) tooltip.classList.add('hidden');
+
       const subcatList = document.getElementById('sub-filter-list');
       const toggleIcon = document.getElementById('view-toggle-icon');
       const toggleText = document.getElementById('view-toggle-text');
@@ -793,6 +891,8 @@
           ytId = src.split('youtu.be/').pop().split('?')[0];
         } else if (src.includes('youtube.com/shorts/')) {
           ytId = src.split('youtube.com/shorts/').pop().split('?')[0];
+        } else if (src.includes('youtube.com/embed/')) {
+          ytId = src.split('embed/').pop().split('?')[0];
         }
 
         const loadYT = () => {
@@ -918,6 +1018,7 @@
         const filterItem = document.querySelector(`li[data-filter="${filter}"]`);
         if (filterItem) {
           currentMainFilter = filter;
+          updateHeroBanner(filter);
 
           // Toggle main gallery filter highlight
           const items = filterItem.parentNode.querySelectorAll('li');
@@ -951,6 +1052,11 @@
                   subItem.classList.add('text-black', 'border-black', 'font-bold');
                 }
               }
+            } else {
+              // Trigger tooltip on page load if direct loading into cinematographer
+              setTimeout(() => {
+                showOnboardingTooltip();
+              }, 500);
             }
           }
           

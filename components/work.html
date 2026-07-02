@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="p-6 bg-white border-t border-black/5">
-        <span class="text-[10px] uppercase tracking-widest text-primary font-bold block mb-2 font-body">VFX Artist / Editor</span>
+        <span class="text-[10px] uppercase tracking-widest text-primary font-bold block mb-2 font-body">VFX Artist / Cinematography</span>
         <h3 class="font-antonio text-2xl uppercase text-black group-hover:text-primary transition-colors font-bold">Nightmare In The Shadow</h3>
       </div>
     </div>
@@ -30,7 +30,7 @@
         </div>
       </div>
       <div class="p-6 bg-white border-t border-black/5">
-        <span class="text-[10px] uppercase tracking-widest text-primary font-bold block mb-2 font-body">VFX Artist / Editor</span>
+        <span class="text-[10px] uppercase tracking-widest text-primary font-bold block mb-2 font-body">VFX Artist</span>
         <h3 class="font-antonio text-2xl uppercase text-black group-hover:text-primary transition-colors font-bold">Khusru Foods AD</h3>
       </div>
     </div>
@@ -164,6 +164,8 @@
           ytId = src.split('youtu.be/').pop().split('?')[0];
         } else if (src.includes('youtube.com/shorts/')) {
           ytId = src.split('youtube.com/shorts/').pop().split('?')[0];
+        } else if (src.includes('youtube.com/embed/')) {
+          ytId = src.split('embed/').pop().split('?')[0];
         }
 
         const loadHomeYT = () => {
