@@ -5,6 +5,14 @@
     -webkit-backface-visibility: hidden;
     transform: translateZ(0);
   }
+  @keyframes shimmer-slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);
+    animation: shimmer-slide 1.5s infinite ease-in-out;
+  }
 </style>
 <section class="pt-20 pb-8 max-md:pt-10 max-md:pb-8 px-8 md:px-20 max-w-screen-2xl mx-auto text-[#1B1C1C]" id="work">
   <div class="mb-20" data-aos="fade-up">
@@ -15,8 +23,11 @@
     <!-- Project 1 -->
       <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/watch?v=gAo7KFSM32M', 'Nightmare In The Shadow')" data-aos="fade-up" data-aos-delay="100">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="https://i.ytimg.com/vi/gAo7KFSM32M/hqdefault.jpg" alt="Nightmare In The Shadow"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="https://i.ytimg.com/vi/gAo7KFSM32M/hqdefault.jpg" alt="Nightmare In The Shadow" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>
@@ -30,8 +41,11 @@
     <!-- Project 2 -->
     <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/ECdSHubQGi8', 'Khusru Foods AD')" data-aos="fade-up" data-aos-delay="200">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/foodadvfx.png" alt="KHUSRU FOODS AD"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="img/portfolio/foodadvfx.png" alt="KHUSRU FOODS AD" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>
@@ -46,8 +60,11 @@
     <!-- Project 3 -->
     <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/5XdWwAL--mQ', 'Paperboat AD')" data-aos="fade-up" data-aos-delay="300">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/paperboat.png" alt="PAPERBOAT - AD"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="img/portfolio/paperboat.png" alt="PAPERBOAT - AD" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>
@@ -62,8 +79,11 @@
     <!-- Project 4 -->
     <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/FXr-2BpS4Po', 'Kappiri Documentary')" data-aos="fade-up" data-aos-delay="100">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/kappiri.png" alt="KAPPIRI-Documentary"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="img/portfolio/kappiri.png" alt="KAPPIRI-Documentary" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>
@@ -79,8 +99,11 @@
     <!-- Project 5 -->
     <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/TmDsi-9pgz8', 'GoPro13 AD')" data-aos="fade-up" data-aos-delay="200">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/gopro.png" alt="GoPro13 - AD"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="img/portfolio/gopro.png" alt="GoPro13 - AD" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>
@@ -95,8 +118,11 @@
     <!-- Project 6 -->
     <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/UJscUDJCq1s', 'Google Gemini AD')" data-aos="fade-up" data-aos-delay="300">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
-        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/gemini.png" alt="Google Gemini - AD"/>
-        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+        <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+          <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+        </div>
+        <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="img/portfolio/gemini.png" alt="Google Gemini - AD" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-20">
           <div class="w-14 h-14 rounded-full bg-black/90 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
             <span class="material-symbols-outlined text-3xl text-white">play_arrow</span>
           </div>

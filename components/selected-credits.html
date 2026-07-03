@@ -6,6 +6,14 @@
     -webkit-backface-visibility: hidden;
     transform: translateZ(0);
   }
+  @keyframes shimmer-slide {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.65) 50%, transparent 100%);
+    animation: shimmer-slide 1.5s infinite ease-in-out;
+  }
 </style>
 <section class="py-20 border-t border-black/5 overflow-hidden" id="selected-credits">
   <div class="px-6 md:px-12 max-w-screen-2xl mx-auto mb-10 flex items-end justify-between" data-aos="fade-up">
@@ -31,10 +39,13 @@
          style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch;">
 
       <!-- Poster 1 -->
-        <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8680.PNG')" data-aos="fade-up" data-aos-delay="100">
+      <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8680.PNG')" data-aos="fade-up" data-aos-delay="100">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8680.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8680.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
@@ -43,28 +54,37 @@
       <!-- Poster 2 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8678.PNG')" data-aos="fade-up" data-aos-delay="200">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8678.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8678.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
       </div>
 
       <!-- Poster 3 -->
-
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8676.PNG')" data-aos="fade-up" data-aos-delay="300">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8676.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8676.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
       </div>
+
       <!-- Poster 4 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8711.PNG')" data-aos="fade-up" data-aos-delay="400">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8711.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[85%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8711.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[85%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
@@ -73,8 +93,11 @@
       <!-- Poster 5 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8675.PNG')" data-aos="fade-up" data-aos-delay="500">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8675.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8675.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
@@ -83,28 +106,37 @@
       <!-- Poster 6 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8713.PNG')" data-aos="fade-up" data-aos-delay="100">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8713.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8713.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
       </div>
 
       <!-- Poster 7 -->
-       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8681.PNG')" data-aos="fade-up" data-aos-delay="200">
+      <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8681.PNG')" data-aos="fade-up" data-aos-delay="200">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8681.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8681.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
       </div>
 
       <!-- Poster 8 -->
-        <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8721.PNG')" data-aos="fade-up" data-aos-delay="300">
+      <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8721.PNG')" data-aos="fade-up" data-aos-delay="300">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8721.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8721.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
@@ -113,8 +145,11 @@
       <!-- Poster 9 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8709.PNG')" data-aos="fade-up" data-aos-delay="400">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8709.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8709.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
@@ -123,8 +158,11 @@
       <!-- Poster 10 -->
       <div class="shrink-0 w-[200px] sm:w-[240px] md:w-[260px] group cursor-pointer" onclick="openCreditLightbox('img/selected-credits/IMG_8708.PNG')" data-aos="fade-up" data-aos-delay="500">
         <div class="aspect-[2/3] overflow-hidden rounded-sm bg-[#F0EDEB] relative shadow-sm border border-black/5 hover:shadow-lg hover:border-primary/30 transition-all duration-400">
-          <img src="img/selected-credits/IMG_8708.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100"/>
-          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+          <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
+            <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
+          </div>
+          <img src="img/selected-credits/IMG_8708.PNG" alt="Selected Credit" loading="lazy" class="w-full h-full object-cover object-[10%_20%] group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4 z-20">
             <span class="material-symbols-outlined text-white text-2xl">zoom_in</span>
           </div>
         </div>
