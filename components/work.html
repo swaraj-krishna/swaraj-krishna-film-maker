@@ -1,11 +1,19 @@
+<style>
+  #work img {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0);
+  }
+</style>
 <section class="pt-20 pb-8 max-md:pt-10 max-md:pb-8 px-8 md:px-20 max-w-screen-2xl mx-auto text-[#1B1C1C]" id="work">
-  <div class="mb-20">
+  <div class="mb-20" data-aos="fade-up">
     <h2 class="font-antonio text-5xl md:text-8xl uppercase text-black font-bold">Featured<br/>Projects</h2>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
     <!-- Project 1 -->
-      <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/watch?v=gAo7KFSM32M', 'Nightmare In The Shadow')">
+      <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/watch?v=gAo7KFSM32M', 'Nightmare In The Shadow')" data-aos="fade-up" data-aos-delay="100">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="https://i.ytimg.com/vi/gAo7KFSM32M/hqdefault.jpg" alt="Nightmare In The Shadow"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -20,7 +28,7 @@
       </div>
     </div>
     <!-- Project 2 -->
-    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/ECdSHubQGi8', 'Khusru Foods AD')">
+    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/ECdSHubQGi8', 'Khusru Foods AD')" data-aos="fade-up" data-aos-delay="200">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/foodadvfx.png" alt="KHUSRU FOODS AD"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -36,7 +44,7 @@
     </div>
 
     <!-- Project 3 -->
-    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/5XdWwAL--mQ', 'Paperboat AD')">
+    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/5XdWwAL--mQ', 'Paperboat AD')" data-aos="fade-up" data-aos-delay="300">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/paperboat.png" alt="PAPERBOAT - AD"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -52,7 +60,7 @@
     </div>
 
     <!-- Project 4 -->
-    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/FXr-2BpS4Po', 'Kappiri Documentary')">
+    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/FXr-2BpS4Po', 'Kappiri Documentary')" data-aos="fade-up" data-aos-delay="100">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/kappiri.png" alt="KAPPIRI-Documentary"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -69,7 +77,7 @@
 
 
     <!-- Project 5 -->
-    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/TmDsi-9pgz8', 'GoPro13 AD')">
+    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/TmDsi-9pgz8', 'GoPro13 AD')" data-aos="fade-up" data-aos-delay="200">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/gopro.png" alt="GoPro13 - AD"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -85,7 +93,7 @@
     </div>
 
     <!-- Project 6 -->
-    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/UJscUDJCq1s', 'Google Gemini AD')">
+    <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all duration-300 flex flex-col justify-between" onclick="openHomeLightbox('video', 'https://www.youtube.com/embed/UJscUDJCq1s', 'Google Gemini AD')" data-aos="fade-up" data-aos-delay="300">
       <div class="aspect-[16/10] overflow-hidden bg-[#F6F3F2] relative">
         <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100" src="img/portfolio/gemini.png" alt="Google Gemini - AD"/>
         <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -101,7 +109,7 @@
     </div>
   </div>
 
-  <div class="text-center mt-16">
+  <div class="text-center mt-16" data-aos="fade-up" data-aos-delay="100">
     <a href="./work.html" class="inline-block bg-black text-white px-8 py-3 rounded-sm font-label uppercase tracking-widest text-sm hover:bg-black/85 transition-colors">
       View All Work
     </a>

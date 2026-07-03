@@ -8,6 +8,7 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
           tailwind.config = {
@@ -40,7 +41,7 @@
   <div id="nav"></div>
 
   <!-- Breadcrumb Banner -->
-  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5">
+  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5" data-aos="fade-up">
     <div class="max-w-screen-2xl mx-auto px-8">
       <h1 class="font-antonio text-5xl md:text-7xl uppercase font-bold tracking-tight text-black mb-4">Skills &amp; Toolkit</h1>
       <div class="text-sm uppercase tracking-widest text-primary font-bold">
@@ -56,7 +57,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
       
       <!-- Proficiencies Progress -->
-      <div>
+      <div data-aos="fade-right" data-aos-delay="100">
         <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Expertise</span>
         <h2 class="font-antonio text-4xl md:text-5xl uppercase mb-12 font-bold text-black">Core Capabilities</h2>
         
@@ -115,7 +116,7 @@
       </div>
 
       <!-- Skill Details Text -->
-      <div>
+      <div data-aos="fade-left" data-aos-delay="300">
         <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Workflow</span>
         <h2 class="font-antonio text-4xl md:text-5xl uppercase mb-8 font-bold text-black">Technical Proficiency</h2>
         <p class="text-black/70 text-lg leading-relaxed mb-6 font-body">
@@ -142,14 +143,14 @@
   <!-- Tools & Technologies Grid -->
   <section class="py-24 bg-[#F6F3F2] border-y border-black/5 px-6 md:px-12">
     <div class="max-w-screen-2xl mx-auto">
-      <div class="text-center mb-16">
+      <div class="text-center mb-16" data-aos="fade-up">
         <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Software Stack</span>
         <h2 class="font-antonio text-4xl md:text-5xl uppercase font-bold text-black">Tools I Command</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Tool 1 -->
-        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm">
+        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="100">
           <div>
             <div class="text-primary text-4xl font-bold mb-6 font-antonio">01</div>
             <h3 class="font-antonio text-2xl uppercase mb-3 text-black font-bold">Blender 3D</h3>
@@ -157,7 +158,7 @@
           </div>
         </div>
         <!-- Tool 2 -->
-        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm">
+        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="200">
           <div>
             <div class="text-primary text-4xl font-bold mb-6 font-antonio">02</div>
             <h3 class="font-antonio text-2xl uppercase mb-3 text-black font-bold">After Effects</h3>
@@ -165,7 +166,7 @@
           </div>
         </div>
         <!-- Tool 3 -->
-        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm">
+        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="300">
           <div>
             <div class="text-primary text-4xl font-bold mb-6 font-antonio">03</div>
             <h3 class="font-antonio text-2xl uppercase mb-3 text-black font-bold">DaVinci Resolve</h3>
@@ -173,7 +174,7 @@
           </div>
         </div>
         <!-- Tool 4 -->
-        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm">
+        <div class="bg-white p-8 border border-black/5 rounded-sm flex flex-col justify-between hover:border-primary/30 transition-all duration-300 shadow-sm" data-aos="fade-up" data-aos-delay="400">
           <div>
             <div class="text-primary text-4xl font-bold mb-6 font-antonio">04</div>
             <h3 class="font-antonio text-2xl uppercase mb-3 text-black font-bold">Premiere Pro</h3>
@@ -185,6 +186,9 @@
   </section>
 
   <div id="footer"></div>
+
+  <!-- Load AOS script from CDN -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
   <!-- Loader Script -->
   <script>
@@ -209,8 +213,17 @@
       }
     };
 
-    loadComponent("nav", "./components/nav.html");
-    loadComponent("footer", "./components/footer.html");
+    Promise.all([
+      loadComponent("nav", "./components/nav.html"),
+      loadComponent("footer", "./components/footer.html")
+    ]).then(() => {
+      AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-out-quad',
+        offset: 120
+      });
+    });
   </script>
   </body>
 </html>

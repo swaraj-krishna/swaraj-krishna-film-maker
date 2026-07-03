@@ -8,6 +8,7 @@
     <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
     <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@400;700&amp;family=Inter:wght@300;400;600&amp;family=Manrope:wght@400;700;800&amp;display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <script id="tailwind-config">
           tailwind.config = {
@@ -37,6 +38,12 @@
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
       }
+      .grid img {
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
+      }
     </style>
   </head>
   <body class="bg-[#FBF9F8] text-[#1B1C1C] font-body selection:bg-primary selection:text-white pt-24">
@@ -44,7 +51,7 @@
   <div id="nav"></div>
 
   <!-- Breadcrumb Banner -->
-  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5">
+  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5" data-aos="fade-up">
     <div class="max-w-screen-2xl mx-auto px-8">
       <h1 class="font-antonio text-5xl md:text-7xl uppercase font-bold tracking-tight text-black mb-4">About Me</h1>
       <div class="text-sm uppercase tracking-widest text-primary font-bold">
@@ -60,7 +67,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
       
       <!-- Photo Grid -->
-      <div class="lg:col-span-6">
+      <div class="lg:col-span-6" data-aos="fade-right" data-aos-delay="100">
         <div class="grid grid-cols-12 gap-4">
           <!-- Main Photo -->
           <div class="col-span-6">
@@ -81,7 +88,7 @@
       </div>
 
       <!-- Bio Text -->
-      <div class="lg:col-span-6">
+      <div class="lg:col-span-6" data-aos="fade-left" data-aos-delay="300">
         <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Who am I?</span>
         <h2 class="font-antonio text-4xl md:text-5xl uppercase mb-8 leading-tight font-bold text-black">Swaraj Krishna T S</h2>
         
@@ -105,6 +112,9 @@
 
   <div id="footer"></div>
 
+  <!-- Load AOS script from CDN -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
   <script>
     const loadComponent = async (id, file) => {
       try {
@@ -127,9 +137,18 @@
       }
     };
 
-    loadComponent("nav", "./components/nav.html");
-    loadComponent("services", "./components/services.html");
-    loadComponent("footer", "./components/footer.html");
+    Promise.all([
+      loadComponent("nav", "./components/nav.html"),
+      loadComponent("services", "./components/services.html"),
+      loadComponent("footer", "./components/footer.html")
+    ]).then(() => {
+      AOS.init({
+        duration: 800,
+        once: true,
+        easing: 'ease-out-quad',
+        offset: 120
+      });
+    });
   </script>
   </body>
 </html>
