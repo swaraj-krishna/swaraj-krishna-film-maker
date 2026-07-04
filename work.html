@@ -477,7 +477,7 @@
           const cover = f.cover || getFolderCover(f.id);
           const posClass = f.position || '';
           const cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/45 transition-all duration-500" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}" onclick="openFolder('${f.id}')">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/45 transition-all duration-500" onclick="openFolder('${f.id}')">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
                   <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
@@ -545,7 +545,7 @@
         let cardHTML = '';
         if (item.type === 'video') {
           cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}" onclick="openLightbox(${index})">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500" onclick="openLightbox(${index})">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
                   <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
@@ -568,7 +568,7 @@
           `;
         } else {
           cardHTML = `
-            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500" data-aos="fade-up" data-aos-delay="${(index % 3) * 100}" onclick="openLightbox(${index})">
+            <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500" onclick="openLightbox(${index})">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
                   <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
@@ -692,7 +692,7 @@
         if (heroBgImg) heroBgImg.classList.add('hidden');
         if (videoControls) videoControls.classList.remove('hidden');
         
-        if (heroTagline) heroTagline.textContent = 'VFX & Cinematography Highlight';
+        if (heroTagline) heroTagline.textContent = 'VFX Highlight';
         if (heroTitle) heroTitle.textContent = 'Show Reel';
         if (heroDesc) heroDesc.textContent = 'Explore a curated compilation of visual effects compositing, professional camera movement, and high-precision color editing.';
       } else {
@@ -708,12 +708,12 @@
             if (heroTitle) heroTitle.textContent = 'Cinematography';
             if (heroDesc) heroDesc.textContent = 'Curated professional camera movement, composition, and visual lighting setups.';
           } else if (filterValue === 'editor') {
-            heroBgImg.src = 'img/cinematography/location_bts/bts_1.webp';
+            heroBgImg.src = 'img/vfx/studio/studio_3.webp';
             if (heroTagline) heroTagline.textContent = 'Post Production';
             if (heroTitle) heroTitle.textContent = 'Film Editing';
             if (heroDesc) heroDesc.textContent = 'Seamless narrative pacing, dynamic sound design, and color grading.';
           } else if (filterValue === 'achivements') {
-            heroBgImg.src = 'img/achievements/achievements_hero_bg.webp';
+            heroBgImg.src = 'img/achievements/achievement_12.webp';
             if (heroTagline) heroTagline.textContent = 'Milestones & Recognition';
             if (heroTitle) heroTitle.textContent = 'Achievements';
             if (heroDesc) heroDesc.textContent = 'Recognized works, certifications, and project screenings.';
