@@ -159,6 +159,7 @@
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">Bike Photos</li>
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">Festival Photos</li>
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">Model Photos</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="travel-photography" onclick="filterSubGallery('travel-photography', this)">Travel Photos</li>
         </ul>
       </div>
       
@@ -344,6 +345,39 @@
           "img/cinematography/models/model_11.webp"
         ]
       },
+      "travel-photography": {
+        "title": "Travel Photos",
+        "images": [
+          "img/cinematography/travel_photography/travel_5.webp",
+         "img/cinematography/travel_photography/travel_2.webp",
+          "img/cinematography/travel_photography/travel_6.webp",
+          "img/cinematography/travel_photography/travel_15.webp",
+         "img/cinematography/travel_photography/travel_9.webp",
+          "img/cinematography/travel_photography/travel_7.webp",
+          "img/cinematography/travel_photography/travel_1.webp",
+          "img/cinematography/travel_photography/travel_3.webp",
+          "img/cinematography/travel_photography/travel_4.webp",
+          "img/cinematography/travel_photography/travel_11.webp",
+          "img/cinematography/travel_photography/travel_12.webp",
+          "img/cinematography/travel_photography/travel_13.webp",
+          "img/cinematography/travel_photography/travel_14.webp",
+          "img/cinematography/travel_photography/travel_16.webp",
+          "img/cinematography/travel_photography/travel_17.webp",
+          "img/cinematography/travel_photography/travel_18.webp",
+          "img/cinematography/travel_photography/travel_19.webp",
+          "img/cinematography/travel_photography/travel_20.webp",
+          "img/cinematography/travel_photography/travel_21.webp",
+          "img/cinematography/travel_photography/travel_22.webp",
+          "img/cinematography/travel_photography/travel_23.webp",
+          "img/cinematography/travel_photography/travel_24.webp",
+          "img/cinematography/travel_photography/travel_25.webp",
+          "img/cinematography/travel_photography/travel_26.webp",
+          "img/cinematography/travel_photography/travel_27.webp",
+          "img/cinematography/travel_photography/travel_28.webp",
+          "img/cinematography/travel_photography/travel_29.webp",
+          "img/cinematography/travel_photography/travel_8.webp",
+        ]
+      },
       "achivements": {
         "title": "Achievements",
         "images": [
@@ -372,6 +406,7 @@
       'car-photography': 'cinematographer',
       'festival-photography': 'cinematographer',
       'models': 'cinematographer',
+      'travel-photography': 'cinematographer',
       'achivements': 'achivements'
     };
 
@@ -474,7 +509,8 @@
           { id: 'cinematography', title: 'Location BTS', cover: 'img/cinematography/location_bts/bts_7.webp', position: '' },
           { id: 'bike-photography', title: 'Bike Photos', cover: 'img/cinematography/bike_photography/bike_32.webp', position: 'object-[50%_70%]' },
           { id: 'festival-photography', title: 'Festival Photos', cover: '', position: '' },
-          { id: 'models', title: 'Model Photos', cover: 'img/cinematography/models/model_9.webp', position: 'object-[50%_40%]' }
+          { id: 'models', title: 'Model Photos', cover: 'img/cinematography/models/model_9.webp', position: 'object-[50%_40%]' },
+          { id: 'travel-photography', title: 'Travel Photos', cover: 'img/cinematography/travel_photography/travel_1.webp', position: '' }
         ];
 
         folders.forEach((f, index) => {
@@ -515,7 +551,8 @@
             'cinematography': 'Location BTS',
             'bike-photography': 'Bike Photos',
             'festival-photography': 'Festival Photos',
-            'models': 'Model Photos'
+            'models': 'Model Photos',
+            'travel-photography': 'Travel Photos'
           };
           if (folderTitleEl) folderTitleEl.textContent = folderTitles[currentOpenFolder] || '';
         }
