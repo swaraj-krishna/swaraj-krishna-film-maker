@@ -20,7 +20,7 @@
     </div>
 
     <!-- Mobile Hamburger Menu Button -->
-    <button id="mobile-menu-btn" class="md:hidden text-black hover:text-primary transition-colors focus:outline-none z-50">
+    <button id="mobile-menu-btn" onclick="const drawer = document.getElementById('mobile-drawer'); const icon = document.getElementById('menu-icon'); if (drawer && icon) { const isOpen = !drawer.classList.contains('translate-x-full'); if (isOpen) { drawer.classList.add('translate-x-full'); icon.textContent = 'menu'; } else { drawer.classList.remove('translate-x-full'); icon.textContent = 'close'; } }" class="md:hidden text-black hover:text-primary transition-colors focus:outline-none z-50">
       <span class="material-symbols-outlined text-3xl" id="menu-icon">menu</span>
     </button>
   </div>
@@ -28,43 +28,19 @@
 
 <!-- Mobile Nav Menu Drawer -->
   <div id="mobile-drawer" class="fixed inset-0 bg-white text-[#1B1C1C] z-40 flex flex-col justify-start items-center gap-6 pt-28 pb-12 overflow-y-auto translate-x-full transition-transform duration-500 md:hidden">
-    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./index.html" onclick="toggleMobileMenu()">Home</a>
-    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./about.html" onclick="toggleMobileMenu()">About</a>
-    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./work.html" onclick="toggleMobileMenu()">Work</a>
-    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./skills.html" onclick="toggleMobileMenu()">Skills</a>
-    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./contact.html" onclick="toggleMobileMenu()">Contact</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./index.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';">Home</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./about.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';">About</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./work.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';">Work</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./skills.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';">Skills</a>
+    <a class="font-['Antonio'] uppercase tracking-wider text-3xl text-black/60 hover:text-black hover:scale-105 transition-all duration-300" href="./contact.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';">Contact</a>
     
-    <a href="./contact.html" onclick="toggleMobileMenu()" class="mt-4 bg-black text-white px-8 py-3 rounded-sm font-label uppercase tracking-widest text-sm hover:bg-black/85 transition-colors">
+    <a href="./contact.html" onclick="document.getElementById('mobile-drawer').classList.add('translate-x-full'); document.getElementById('menu-icon').textContent = 'menu';" class="mt-4 bg-black text-white px-8 py-3 rounded-sm font-label uppercase tracking-widest text-sm hover:bg-black/85 transition-colors">
       Let's Talk
     </a>
   </div>
 
   <script>
     (function() {
-      const btn = document.getElementById('mobile-menu-btn');
-      const drawer = document.getElementById('mobile-drawer');
-      const icon = document.getElementById('menu-icon');
-
-      if (btn && drawer) {
-        btn.addEventListener('click', () => {
-          const isOpen = !drawer.classList.contains('translate-x-full');
-          if (isOpen) {
-            drawer.classList.add('translate-x-full');
-            icon.textContent = 'menu';
-          } else {
-            drawer.classList.remove('translate-x-full');
-            icon.textContent = 'close';
-          }
-        });
-      }
-
-      window.toggleMobileMenu = function() {
-        if (drawer && icon) {
-          drawer.classList.add('translate-x-full');
-          icon.textContent = 'menu';
-        }
-      }
-
       // Highlight active nav link based on current page url
       const path = window.location.pathname;
       const page = path.split("/").pop();
