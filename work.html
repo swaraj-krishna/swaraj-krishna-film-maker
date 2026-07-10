@@ -155,11 +155,12 @@
       <div class="overflow-x-auto scrollbar-none w-full flex justify-center" style="-webkit-overflow-scrolling: touch;">
         <ul id="sub-filter-list" class="flex justify-center gap-2 sm:gap-4 md:gap-6 border-b border-black/5 pb-3 font-antonio text-[10px] sm:text-xs md:text-sm uppercase tracking-widest whitespace-nowrap">
           <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black border-black font-bold whitespace-nowrap" data-subcat="all" onclick="filterSubGallery('all', this)">All</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">Location BTS</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">Bike Photos</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">Festival Photos</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">Model Photos</li>
-          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="travel-photography" onclick="filterSubGallery('travel-photography', this)">Travel Photos</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="cinematography" onclick="filterSubGallery('cinematography', this)">LOCATION BTS</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="event-shoots" onclick="filterSubGallery('event-shoots', this)">EVENTS</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="models" onclick="filterSubGallery('models', this)">MODELS</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="bike-photography" onclick="filterSubGallery('bike-photography', this)">BIKE</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="travel-photography" onclick="filterSubGallery('travel-photography', this)">TRAVEL</li>
+          <li class="cursor-pointer border-b-2 pb-1.5 transition-all text-black/60 hover:text-black border-transparent whitespace-nowrap" data-subcat="festival-photography" onclick="filterSubGallery('festival-photography', this)">FESTIVAL</li>
         </ul>
       </div>
       
@@ -261,7 +262,7 @@
         ]
       },
       "cinematography": {
-        "title": "Location BTS",
+        "title": "LOCATION BTS",
         "images": [
           "img/cinematography/location_bts/bts_1.webp",
           "img/cinematography/location_bts/bts_2.webp",
@@ -274,7 +275,7 @@
         ]
       },
       "bike-photography": {
-        "title": "Bike Photography",
+        "title": "BIKE",
         "images": [
           "img/cinematography/bike_photography/bike_12.webp",
           "img/cinematography/bike_photography/bike_13.webp",
@@ -318,7 +319,7 @@
         ]
       },
       "festival-photography": {
-        "title": "Festival Photography",
+        "title": "FESTIVAL",
         "images": [
           "img/cinematography/festival_photography/festival_1.webp",
           "img/cinematography/festival_photography/festival_2.webp",
@@ -330,7 +331,7 @@
         ]
       },
       "models": {
-        "title": "Models Portrait",
+        "title": "MODELS",
         "images": [
           "img/cinematography/models/model_1.webp",
           "img/cinematography/models/model_2.webp",
@@ -346,7 +347,7 @@
         ]
       },
       "travel-photography": {
-        "title": "Travel Photos",
+        "title": "TRAVEL",
         "images": [
           "img/cinematography/travel_photography/travel_5.webp",
          "img/cinematography/travel_photography/travel_2.webp",
@@ -407,6 +408,7 @@
       'festival-photography': 'cinematographer',
       'models': 'cinematographer',
       'travel-photography': 'cinematographer',
+      'event-shoots': 'cinematographer',
       'achivements': 'achivements'
     };
 
@@ -419,21 +421,21 @@
       { src: 'img/portfolio/featured_gopro13_ad.webp', url: 'https://youtu.be/TmDsi-9pgz8?si=EwDJHVq_ICLJlFHM', description:"GoPro13 - 3D Motion Graphics AD", filter: ['vfxartist'] },
       // { src: 'img/portfolio/featured_google_gemini_ad.webp', url: 'https://youtu.be/UJscUDJCq1s?si=STrGlUlrOn9CnulO', description:"Google Gemini - 2D Motion Graphics AD", filter: ['vfxartist'] },
       { src: 'img/portfolio/featured_phonepe_ad.webp', url: 'https://m.youtube.com/watch?v=kfiAp_Hq1eM', description:"PhonePe - AD", filter: ['vfxartist'] },
+      { src: 'https://img.youtube.com/vi/DYC64FTFZg8/hqdefault.jpg', url: 'https://youtube.com/shorts/DYC64FTFZg8?feature=shared', description:"LAQSHYA Festival", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/7Fvvvyexoho/hqdefault.jpg', url: 'https://youtube.com/shorts/7Fvvvyexoho?feature=shared', description:"Baby Jean Music", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/I1rb7eNVtsY/hqdefault.jpg', url: 'https://youtube.com/shorts/I1rb7eNVtsY?feature=shared', description:"SFX Light", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/45vfKvvgZ08/hqdefault.jpg', url: 'https://youtube.com/shorts/45vfKvvgZ08?feature=shared', description:"Vedan Music", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/NDH-Agtmmf8/hqdefault.jpg', url: 'https://youtube.com/shorts/NDH-Agtmmf8?feature=shared', description:"Kirtiii Model", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/0kqA2dPKD3Y/hqdefault.jpg', url: 'https://youtube.com/shorts/0kqA2dPKD3Y?feature=shared', description:"Vidhu Prathap Music", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/VNb1brV_VgU/hqdefault.jpg', url: 'https://youtu.be/VNb1brV_VgU?si=tLZAIme5JrZkYMdy', description:"Laqshya Festival", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/UKCAbphIdDk/hqdefault.jpg', url: 'https://youtu.be/UKCAbphIdDk?si=H5A06SXGmI8W6cZ7', description:"Almaram Band", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
+      { src: 'https://img.youtube.com/vi/cYNbawvZz6I/hqdefault.jpg', url: 'https://youtu.be/cYNbawvZz6I?si=nbvFfSvoKCfRka7W', description:"AL Azhar Festival", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
       { src: 'https://img.youtube.com/vi/bqdS1xow9b4/hqdefault.jpg', url: 'https://youtube.com/shorts/bqdS1xow9b4?feature=shared', description:"Web Series BTS", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/QJziVV2-_sI/hqdefault.jpg', url: 'https://youtu.be/QJziVV2-_sI?si=qjBnODwLgiCAVYzJ', description:"Kaapi Street Cafe AD", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/0NjZcD3wEI4/hqdefault.jpg', url: 'https://youtu.be/0NjZcD3wEI4?si=cFgC9YbLhH8_5FXE', description:"ADI INSTITUTE", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/L5hx1gXmZf0/hqdefault.jpg', url: 'https://youtube.com/shorts/L5hx1gXmZf0?feature=shared', description:"WAFFEE HOUSE AD", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/VNb1brV_VgU/hqdefault.jpg', url: 'https://youtu.be/VNb1brV_VgU?si=tLZAIme5JrZkYMdy', description:"Laqshya Festival", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/UKCAbphIdDk/hqdefault.jpg', url: 'https://youtu.be/UKCAbphIdDk?si=H5A06SXGmI8W6cZ7', description:"Almaram Band", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/cYNbawvZz6I/hqdefault.jpg', url: 'https://youtu.be/cYNbawvZz6I?si=nbvFfSvoKCfRka7W', description:"AL Azhar Festival", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/wwHHrhQC7Qw/hqdefault.jpg', url: 'https://youtu.be/wwHHrhQC7Qw?si=CkHN-pXSJAzf_qhU', description:"Sunset", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/DYC64FTFZg8/hqdefault.jpg', url: 'https://youtube.com/shorts/DYC64FTFZg8?feature=shared', description:"LAQSHYA Festival", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/LxlDGVW_EXo/hqdefault.jpg', url: 'https://youtube.com/shorts/LxlDGVW_EXo?feature=shared', description:"CQD MUSIC", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/7Fvvvyexoho/hqdefault.jpg', url: 'https://youtube.com/shorts/7Fvvvyexoho?feature=shared', description:"Baby Jean Music", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/I1rb7eNVtsY/hqdefault.jpg', url: 'https://youtube.com/shorts/I1rb7eNVtsY?feature=shared', description:"SFX Light", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/45vfKvvgZ08/hqdefault.jpg', url: 'https://youtube.com/shorts/45vfKvvgZ08?feature=shared', description:"Vedan Music", filter: ['editor'] },
-      { src: 'https://img.youtube.com/vi/NDH-Agtmmf8/hqdefault.jpg', url: 'https://youtube.com/shorts/NDH-Agtmmf8?feature=shared', description:"Kirtiii Model", filter: ['editor'] },
-    { src: 'https://img.youtube.com/vi/0kqA2dPKD3Y/hqdefault.jpg', url: 'https://youtube.com/shorts/0kqA2dPKD3Y?feature=shared', description:"Vidhu Prathap Music", filter: ['editor'] },
+      { src: 'https://img.youtube.com/vi/LxlDGVW_EXo/hqdefault.jpg', url: 'https://youtube.com/shorts/LxlDGVW_EXo?feature=shared', description:"CQD MUSIC", filter: ['editor', 'cinematographer'], subcategory: 'event-shoots' },
       { src: 'https://img.youtube.com/vi/U0AXXh_eGic/hqdefault.jpg', url: 'https://youtu.be/U0AXXh_eGic?si=0t0MtHBKYJu-wgAi', description:"AUDI RS4", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/ZFZgfKz5Mx4/hqdefault.jpg', url: 'https://youtube.com/shorts/ZFZgfKz5Mx4?feature=shared', description:"JF GYM WORK", filter: ['editor'] },
       { src: 'https://img.youtube.com/vi/-iSx71_ZaXo/hqdefault.jpg', url: 'https://youtube.com/shorts/-iSx71_ZaXo?feature=shared', description:"GYM WORK2", filter: ['editor'] },
@@ -456,7 +458,7 @@
         url: v.url,
         description: v.description,
         filters: v.filter,
-        subcategory: 'all'
+        subcategory: v.subcategory || 'all'
       });
     });
 
@@ -506,17 +508,19 @@
         grid.classList.remove('hidden');
         
         const folders = [
-          { id: 'cinematography', title: 'Location BTS', cover: 'img/cinematography/location_bts/bts_7.webp', position: '' },
-          { id: 'bike-photography', title: 'Bike Photos', cover: 'img/cinematography/bike_photography/bike_32.webp', position: 'object-[50%_70%]' },
-          { id: 'festival-photography', title: 'Festival Photos', cover: '', position: '' },
-          { id: 'models', title: 'Model Photos', cover: 'img/cinematography/models/model_9.webp', position: 'object-[50%_40%]' },
-          { id: 'travel-photography', title: 'Travel Photos', cover: 'img/cinematography/travel_photography/travel_1.webp', position: '' }
+          { id: 'cinematography', title: 'LOCATION BTS', cover: 'img/cinematography/location_bts/bts_7.webp', position: '' },
+          { id: 'event-shoots', title: 'EVENTS', cover: 'https://img.youtube.com/vi/DYC64FTFZg8/hqdefault.jpg', position: '' },
+          { id: 'models', title: 'MODELS', cover: 'img/cinematography/models/model_9.webp', position: 'object-[50%_40%]' },
+          { id: 'bike-photography', title: 'BIKE', cover: 'img/cinematography/bike_photography/bike_32.webp', position: 'object-[50%_70%]' },
+          { id: 'travel-photography', title: 'TRAVEL', cover: 'img/cinematography/travel_photography/travel_1.webp', position: '' },
+          { id: 'festival-photography', title: 'FESTIVAL', cover: '', position: '' }
         ];
 
         folders.forEach((f, index) => {
           const count = getPhotosCount(f.id);
           const cover = f.cover || getFolderCover(f.id);
           const posClass = f.position || '';
+          const countLabel = f.id === 'event-shoots' ? 'Videos' : 'Photos';
           const cardHTML = `
             <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-lg hover:border-primary/45 transition-all duration-500" onclick="openFolder('${f.id}')">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
@@ -530,7 +534,7 @@
               </div>
               <div class="p-5 bg-white border-t border-black/5 flex justify-between items-center">
                 <div>
-                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">${count} Photos</span>
+                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body">${count} ${countLabel}</span>
                   <h3 class="font-antonio text-base sm:text-lg uppercase text-black font-bold truncate">${f.title}</h3>
                 </div>
                 <span class="material-symbols-outlined text-black/30 group-hover:text-primary transition-all duration-300 transform group-hover:translate-x-1">arrow_forward</span>
@@ -548,11 +552,12 @@
           folderHeader.classList.remove('hidden');
           const folderTitleEl = document.getElementById('folder-title-text');
           const folderTitles = {
-            'cinematography': 'Location BTS',
-            'bike-photography': 'Bike Photos',
-            'festival-photography': 'Festival Photos',
-            'models': 'Model Photos',
-            'travel-photography': 'Travel Photos'
+            'cinematography': 'LOCATION BTS',
+            'event-shoots': 'EVENTS',
+            'models': 'MODELS',
+            'bike-photography': 'BIKE',
+            'travel-photography': 'TRAVEL',
+            'festival-photography': 'FESTIVAL'
           };
           if (folderTitleEl) folderTitleEl.textContent = folderTitles[currentOpenFolder] || '';
         }
@@ -1240,7 +1245,7 @@
         duration: 800,
         once: true,
         easing: 'ease-out-quad',
-        offset: 120
+        offset: 20
       });
     });
   </script>
