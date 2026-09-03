@@ -730,7 +730,19 @@
       
       const textContainer = document.getElementById('hero-text-container');
       if (textContainer) {
-        textContainer.classList.remove('animate-text-reveal');
+        // Reset toggle overlay state
+        textContainer.classList.remove('animate-text-reveal', 'opacity-0', 'pointer-events-none', 'scale-95');
+        
+        if (heroVideo) {
+          heroVideo.classList.remove('brightness-100', 'blur-none');
+          heroVideo.classList.add('brightness-[0.5]', 'blur-[2px]');
+        }
+        
+        const toggleOverlayIcon = document.getElementById('video-toggle-overlay-icon');
+        const toggleOverlayBtn = document.getElementById('video-toggle-overlay-btn');
+        if (toggleOverlayIcon) toggleOverlayIcon.className = 'fa fa-eye text-sm';
+        if (toggleOverlayBtn) toggleOverlayBtn.title = 'Toggle Clean View';
+
         // Force DOM reflow to restart CSS animation
         void textContainer.offsetWidth;
       }
@@ -1191,6 +1203,7 @@
             toggleOverlayBtn.title = 'Toggle Clean View';
           } else {
             textContainer.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            textContainer.classList.remove('animate-text-reveal'); // Ensure animation doesn't override opacity-0
             video.classList.remove('brightness-[0.5]', 'blur-[2px]');
             video.classList.add('brightness-100', 'blur-none');
             toggleOverlayIcon.className = 'fa fa-eye-slash text-sm';
