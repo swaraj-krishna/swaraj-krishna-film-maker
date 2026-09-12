@@ -240,20 +240,44 @@
         "images": [
           "img/vfx/blender_3d/blender_1.webp",
           "img/vfx/blender_3d/blender_2.webp",
-          "img/vfx/blender_3d/blender_3.webp",
-          "img/vfx/blender_3d/blender_4.webp",
           "img/vfx/blender_3d/blender_5.webp",
-          "img/vfx/blender_3d/blender_6.webp",
           "img/vfx/blender_3d/blender_7.webp",
           "img/vfx/blender_3d/blender_8.webp",
           "img/vfx/blender_3d/blender_9.webp",
-          "img/vfx/blender_3d/blender_10.webp",
+          "img/vfx/blender_3d/blender_10.webp"
+        ]
+      },
+      "maya": {
+        "title": "Maya",
+        "images": [
           "img/vfx/blender_3d/blender_11.webp",
           "img/vfx/blender_3d/blender_12.webp",
           "img/vfx/blender_3d/blender_13.webp",
           "img/vfx/blender_3d/blender_14.webp"
         ]
       },
+      "character-modeling": {
+        "title": "Character Modeling",
+        "images": [
+          "img/vfx/blender_3d/modeling_1.webp",
+          "img/vfx/blender_3d/modeling_2.webp"
+        ]
+      },
+      "creature-modeling": {
+        "title": "Creature modelling",
+        "images": [
+          "img/vfx/blender_3d/modeling_3.webp",
+          "img/vfx/blender_3d/modeling_4.webp"
+        ]
+      },
+      "environment-modeling": {
+        "title": "3D Environment Modeling",
+        "images": [
+          "img/vfx/blender_3d/modeling_5.webp",
+          "img/vfx/blender_3d/modeling_6.webp"
+        ]
+      },
+
       "vfx-studio": {
         "title": "VFX Studio",
         "images": [
@@ -401,6 +425,10 @@
 
     const filtersMap = {
       'blender-3d': 'vfxartist',
+      'character-modeling': 'vfxartist',
+      'creature-modeling': 'vfxartist',
+      'environment-modeling': 'vfxartist',
+      'maya': 'vfxartist',
       'vfx-studio': 'vfxartist',
       'bike-photography': 'cinematographer',
       'cinematography': 'cinematographer',
@@ -416,9 +444,11 @@
       { src: 'https://i.ytimg.com/vi/c5nmjmTvndA/hqdefault.jpg', url: 'https://www.youtube.com/embed/c5nmjmTvndA?si=pn-g5nRnfX3SgUMg', description:"SECRET OF KALINGA MOVIE TEASER", filter: ['vfxartist'] },
       { src: 'https://i.ytimg.com/vi/gAo7KFSM32M/hqdefault.jpg', url: 'https://www.youtube.com/watch?v=gAo7KFSM32M', description:"Nightmare In The Shadow", filter: ['vfxartist'] },
       { src: 'img/portfolio/featured_food_ad_vfx.webp', url: 'https://youtu.be/ECdSHubQGi8?si=CpiKRRDoNOVTuQmn', description:"KHUSRU FOODS AD", filter: ['vfxartist'] },
+      // { src: 'img/portfolio/kushru-foods-ad-breakdown.png', url: 'img/showreel/Kushru_foods_ad_work.mp4', description:"VFX BREAK DOWN - KHUSRU FOODS AD ", filter: ['vfxartist'] },
+
       { src: 'img/portfolio/featured_paperboat_ad.webp', url: 'https://m.youtube.com/watch?v=5XdWwAL--mQ', description:"PAPERBOAT - AD", filter: ['vfxartist'] },
       { src: 'img/portfolio/featured_kappiri_documentary.webp', url: 'https://youtu.be/FXr-2BpS4Po?si=4ENMvQX2Tk3CHRfu', description:"KAPPIRI-Documentary", filter: ['vfxartist'] },
-      { src: 'img/portfolio/veesumkatrillyricalvideo.webp', url: 'https://youtu.be/4ZK4KI5UXkI?si=5lEPr6xy7PNIOUQJ', description:"Veesum Katril Lyrical video", filter: ['vfxartist'] },
+      { src: 'img/portfolio/veesumkatrillyricalvideo.webp', url: 'https://youtu.be/4ZK4KI5UXkI?si=5lEPr6xy7PNIOUQJ', description:"Veesum Katril Lyrical video", filter: ['vfxartist','editor'] },
       { src: 'img/portfolio/featured_gopro13_ad.webp', url: 'https://youtu.be/TmDsi-9pgz8?si=EwDJHVq_ICLJlFHM', description:"GoPro13 - 3D Motion Graphics AD", filter: ['vfxartist'] },
       { src: 'img/portfolio/unrealEngineImg.webp', url: 'https://www.youtube.com/watch?v=mtp8WPPYTAw', description:"3D Environment - Unreal Engine", filter: ['vfxartist'] },
       { src: 'img/portfolio/featured_google_gemini_ad.webp', url: 'https://youtu.be/UJscUDJCq1s?si=STrGlUlrOn9CnulO', description:"Google Gemini - 2D Motion Graphics AD", filter: ['vfxartist'] },
@@ -468,8 +498,8 @@
 
     // Compile images
     let folderIds = Object.keys(projectFolders);
-    folderIds = folderIds.filter(id => id !== 'blender-3d' && id !== 'vfx-studio' && id !== 'achivements');
-    folderIds.push('blender-3d', 'vfx-studio', 'achivements');
+    folderIds = folderIds.filter(id => id !== 'blender-3d' && id !== 'character-modeling' && id !== 'creature-modeling' && id !== 'environment-modeling' && id !== 'maya' && id !== 'vfx-studio' && id !== 'achivements');
+    folderIds.push('character-modeling', 'creature-modeling', 'environment-modeling', 'maya', 'blender-3d', 'vfx-studio', 'achivements');
 
     folderIds.forEach(folderId => {
       const folder = projectFolders[folderId];
@@ -618,13 +648,18 @@
             </div>
           `;
         } else {
+          let tagText = 'Photography';
+          if (item.subcategory === 'blender-3d' || item.subcategory === 'maya') tagText = 'Render';
+          else if (item.subcategory === 'character-modeling' || item.subcategory === 'creature-modeling') tagText = 'Zbrush';
+          else if (item.subcategory === 'environment-modeling') tagText = 'Unreal engine';
+
           cardHTML = `
             <div class="group cursor-pointer bg-white border border-black/5 rounded-sm overflow-hidden shadow-sm hover:shadow-md hover:border-primary/45 transition-all duration-500" onclick="openLightbox(${index})">
               <div class="aspect-[4/3] overflow-hidden bg-[#F6F3F2] relative">
                 <div class="absolute inset-0 bg-[#EFECEB] overflow-hidden z-0">
                   <div class="absolute inset-0 w-full h-full animate-shimmer"></div>
                 </div>
-                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="${item.src}" alt="${item.description}" loading="lazy" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
+                <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-95 group-hover:brightness-100 opacity-0 transition-opacity duration-500 relative z-10" src="${item.src}" alt="${item.description}" loading="lazy" style="${item.src.includes('modeling_2.webp') ? 'object-position: 10% 10%;' : ''}" onload="this.previousElementSibling.remove(); this.classList.remove('opacity-0')"/>
                 <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                   <div class="w-12 h-12 rounded-full bg-black/95 text-white flex items-center justify-center shadow-lg transform scale-75 group-hover:scale-100 transition-all duration-300">
                     <span class="material-symbols-outlined text-2xl text-white">visibility</span>
@@ -633,7 +668,7 @@
               </div>
               <div class="p-4 bg-white border-t border-black/5 flex justify-between items-center">
                 <div>
-                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body font-bold">Photography</span>
+                  <span class="text-[9px] uppercase tracking-widest text-primary font-bold block mb-1 font-body font-bold">${tagText}</span>
                   <h3 class="font-antonio text-sm sm:text-base uppercase text-black font-bold truncate max-w-[150px] sm:max-w-[170px]">${item.description}</h3>
                 </div>
                 <span class="material-symbols-outlined text-black/30 group-hover:text-primary transition-colors">visibility</span>
