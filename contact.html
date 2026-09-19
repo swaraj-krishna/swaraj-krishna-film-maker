@@ -49,7 +49,7 @@
   <div id="nav"></div>
 
   <!-- Breadcrumb Banner -->
-  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5" data-aos="fade-up">
+  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5 no-mobile-aos" data-aos="fade-up">
     <div class="max-w-screen-2xl mx-auto px-8">
       <h1 class="font-antonio text-5xl md:text-7xl uppercase font-bold tracking-tight text-black mb-4">Contact Me</h1>
       <div class="text-sm uppercase tracking-widest text-primary font-bold">
@@ -65,7 +65,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       
       <!-- Card 1: Address -->
-      <a href="https://www.google.com/maps/place/Kochi,+Kerala,+India" target="_blank" rel="noopener noreferrer" class="relative overflow-hidden bg-gradient-to-br from-white to-[#FAF8F7] border border-black/[0.04] p-8 hover:border-primary/25 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] group flex flex-col justify-between min-h-[170px]" data-aos="fade-up" data-aos-delay="100">
+      <a href="https://www.google.com/maps/place/Kochi,+Kerala,+India" target="_blank" rel="noopener noreferrer" class="relative overflow-hidden bg-gradient-to-br from-white to-[#FAF8F7] border border-black/[0.04] p-8 hover:border-primary/25 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] group flex flex-col justify-between min-h-[170px] no-mobile-aos" data-aos="fade-up" data-aos-delay="100">
         <div class="flex justify-between items-start w-full relative z-10">
           <span class="text-[9px] font-bold uppercase tracking-[0.25em] text-black/35 font-body">Address</span>
           <div class="w-10 h-10 rounded-full bg-black/[0.03] border border-black/[0.06] flex items-center justify-center text-black group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-110 transition-all duration-500 shadow-sm shrink-0">
@@ -81,7 +81,7 @@
       </a>
 
       <!-- Card 2: Hotline -->
-      <a href="tel:+919061460087" class="relative overflow-hidden bg-gradient-to-br from-white to-[#FAF8F7] border border-black/[0.04] p-8 hover:border-primary/25 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] group flex flex-col justify-between min-h-[170px]" data-aos="fade-up" data-aos-delay="200">
+      <a href="tel:+919061460087" class="relative overflow-hidden bg-gradient-to-br from-white to-[#FAF8F7] border border-black/[0.04] p-8 hover:border-primary/25 transition-all duration-500 hover:-translate-y-1.5 hover:shadow-[0_12px_30px_rgba(0,0,0,0.04)] group flex flex-col justify-between min-h-[170px] no-mobile-aos" data-aos="fade-up" data-aos-delay="200">
         <div class="flex justify-between items-start w-full relative z-10">
           <span class="text-[9px] font-bold uppercase tracking-[0.25em] text-black/35 font-body">Hotline</span>
           <div class="w-10 h-10 rounded-full bg-black/[0.03] border border-black/[0.06] flex items-center justify-center text-black group-hover:bg-primary group-hover:text-white group-hover:border-primary group-hover:scale-110 transition-all duration-500 shadow-sm shrink-0">
@@ -170,7 +170,7 @@
   </section>
 
   <!-- Interactive Map & Form Section -->
-  <section class="py-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
+  <section id="get-in-touch" class="py-20 px-6 md:px-12 max-w-screen-2xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
       
       <!-- Google Map Frame -->
@@ -269,6 +269,11 @@
       loadComponent("nav", "./components/nav.html"),
       loadComponent("footer", "./components/footer.html")
     ]).then(() => {
+      if (window.innerWidth < 768) {
+        document.querySelectorAll('.no-mobile-aos').forEach(el => {
+          el.removeAttribute('data-aos');
+        });
+      }
       AOS.init({
         duration: 800,
         once: true,

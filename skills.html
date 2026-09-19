@@ -45,7 +45,7 @@
   <div id="nav"></div>
 
   <!-- Breadcrumb Banner -->
-  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5" data-aos="fade-up">
+  <section class="py-20 bg-[#F6F3F2] text-center border-b border-black/5 no-mobile-aos" data-aos="fade-up">
     <div class="max-w-screen-2xl mx-auto px-8">
       <h1 class="font-antonio text-5xl md:text-7xl uppercase font-bold tracking-tight text-black mb-4">Skills &amp; Toolkit</h1>
       <div class="text-sm uppercase tracking-widest text-primary font-bold">
@@ -61,7 +61,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
       
       <!-- Proficiencies Progress -->
-      <div data-aos="fade-right" data-aos-delay="100">
+      <div class="no-mobile-aos" data-aos="fade-right" data-aos-delay="100">
         <span class="text-xs font-bold uppercase tracking-[0.3em] text-primary mb-4 block">Expertise</span>
         <h2 class="font-antonio text-4xl md:text-5xl uppercase mb-12 font-bold text-black">Core Capabilities</h2>
         
@@ -252,6 +252,11 @@
       loadComponent("nav", "./components/nav.html"),
       loadComponent("footer", "./components/footer.html")
     ]).then(() => {
+      if (window.innerWidth < 768) {
+        document.querySelectorAll('.no-mobile-aos').forEach(el => {
+          el.removeAttribute('data-aos');
+        });
+      }
       AOS.init({
         duration: 800,
         once: true,
