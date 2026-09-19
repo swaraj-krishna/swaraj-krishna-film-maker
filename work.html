@@ -166,10 +166,16 @@
       
       <!-- View Toggle Button and Tooltip Wrapper -->
       <div class="relative mt-2 min-[900px]:mt-0 min-[900px]:absolute min-[900px]:right-6 min-[900px]:top-1/2 min-[900px]:-translate-y-1/2">
-        <button id="view-toggle-btn" class="shrink-0 px-4 py-2 border border-black/15 hover:border-black rounded-sm flex items-center justify-center gap-2 font-antonio text-xs uppercase tracking-widest text-black/75 hover:text-black hover:bg-black hover:text-white transition-all duration-300 shadow-sm" onclick="toggleGalleryView()">
-          <span id="view-toggle-icon" class="material-symbols-outlined text-base">folder</span>
-          <span id="view-toggle-text">Folder View</span>
-        </button>
+        <div id="view-toggle-container" class="flex shrink-0 border border-black/15 rounded-sm overflow-hidden font-antonio text-xs uppercase tracking-widest shadow-sm">
+          <button id="btn-view-grid" onclick="setGalleryView('grid')" class="flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-black text-white">
+            <span class="material-symbols-outlined text-base">grid_view</span>
+            <span>Grid</span>
+          </button>
+          <button id="btn-view-folder" onclick="setGalleryView('folder')" class="flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-white text-black/60 hover:text-black hover:bg-black/5 border-l border-black/15">
+            <span class="material-symbols-outlined text-base">folder</span>
+            <span>Folder</span>
+          </button>
+        </div>
         <!-- Onboarding Tooltip (Disappears after 3 seconds) -->
         <div id="toggle-tooltip" class="hidden absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-44 text-black text-[9px] font-antonio tracking-widest uppercase py-1 px-2 z-30 transition-all duration-500 opacity-0 transform translate-y-2 pointer-events-none flex flex-col items-center justify-center font-bold">
           <span class="text-center leading-normal">Click here to change layout</span>
@@ -361,7 +367,6 @@
           "img/cinematography/models/model_2.webp",
           "img/cinematography/models/model_3.webp",
           "img/cinematography/models/model_4.webp",
-          "img/cinematography/models/model_5.webp",
           "img/cinematography/models/model_6.webp",
           "img/cinematography/models/model_7.webp",
           "img/cinematography/models/model_8.webp",
@@ -852,10 +857,12 @@
         currentOpenFolder = null;
         const subcatList = document.getElementById('sub-filter-list');
         if (subcatList) subcatList.classList.remove('hidden');
-        const toggleIcon = document.getElementById('view-toggle-icon');
-        const toggleText = document.getElementById('view-toggle-text');
-        if (toggleIcon) toggleIcon.textContent = 'folder';
-        if (toggleText) toggleText.textContent = 'Folder View';
+        const gridBtn = document.getElementById('btn-view-grid');
+        const folderBtn = document.getElementById('btn-view-folder');
+        if (gridBtn && folderBtn) {
+          gridBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-black text-white';
+          folderBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-white text-black/60 hover:text-black hover:bg-black/5 border-l border-black/15';
+        }
 
         // Reset subcategory active highlight
         const subItems = subcontainer.querySelectorAll('li');
@@ -904,21 +911,19 @@
       copyCurrentLinkToClipboard();
     };
 
-    window.toggleGalleryView = function() {
+    window.setGalleryView = function(view) {
+      if (currentGalleryView === view) return; // Already in this view
+      
       // Hide tooltip immediately if clicked
       const tooltip = document.getElementById('toggle-tooltip');
       if (tooltip) tooltip.classList.add('hidden');
 
       const subcatList = document.getElementById('sub-filter-list');
-      const toggleIcon = document.getElementById('view-toggle-icon');
-      const toggleText = document.getElementById('view-toggle-text');
       
-      if (currentGalleryView === 'grid') {
+      if (view === 'folder') {
         currentGalleryView = 'folder';
         currentOpenFolder = null;
         if (subcatList) subcatList.classList.add('hidden');
-        if (toggleIcon) toggleIcon.textContent = 'grid_view';
-        if (toggleText) toggleText.textContent = 'Grid View';
       } else {
         currentGalleryView = 'grid';
         currentSubcategory = 'all';
@@ -936,8 +941,19 @@
             defaultSub.classList.add('text-black', 'border-black', 'font-bold');
           }
         }
-        if (toggleIcon) toggleIcon.textContent = 'folder';
-        if (toggleText) toggleText.textContent = 'Folder View';
+      }
+      
+      // Update toggle button styles
+      const gridBtn = document.getElementById('btn-view-grid');
+      const folderBtn = document.getElementById('btn-view-folder');
+      if (gridBtn && folderBtn) {
+        if (currentGalleryView === 'grid') {
+          gridBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-black text-white';
+          folderBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-white text-black/60 hover:text-black hover:bg-black/5 border-l border-black/15';
+        } else {
+          folderBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-black text-white border-l border-black/15';
+          gridBtn.className = 'flex items-center justify-center gap-2 px-4 py-2 transition-all duration-300 bg-white text-black/60 hover:text-black hover:bg-black/5';
+        }
       }
       
       updateQueryParams();
